@@ -702,7 +702,7 @@ function build(id,s){const h1=q(s,'h1'),cam=q(s,'.cameo svg');
   case 'chain-agent':{const svg=q(s,'.scene'),c=cast(svg),man=q(svg,'.fig-man-agent'),bot=q(svg,'.fig-robot'),gear=q(man,'.gear');
     const A1=qa(s,'.labels .a'),Z1=qa(s,'.labels .z');
     const suitUp=gear?{pre(){hold(gear,{opacity:'0'})},play(t){unhold(gear);A(gear,[{opacity:0,transform:'translateY(-16px)'},{opacity:1,transform:'translateY(0)'}],{duration:480,delay:t,easing:'cubic-bezier(.2,.7,.2,1)'});return t+480;}}:wait(0);
-    return{steps:[seq(par(fade(svg,400),fade(q(s,'.c1'),400,6)),lag(900,suitUp)),seq(par(fadeOut(man,350),...A1.map(e=>fadeOut(e,300)),fadeOut(q(s,'.c1'),300)),par(enter(bot),...Z1.map(e=>fade(e,300,6)),lag(400,fade(q(s,'.c2'),400,6))))],
+    return{steps:[seq(par(fade(svg,400),fade(q(s,'.c1'),400,6)),lag(2400,suitUp)),seq(par(fadeOut(man,350),...A1.map(e=>fadeOut(e,300)),fadeOut(q(s,'.c1'),300)),par(enter(bot),...Z1.map(e=>fade(e,300,6)),lag(400,fade(q(s,'.c2'),400,6))))],
       pre(){hold(bot,{opacity:'0'});Z1.forEach(e=>hold(e,{opacity:'0'}));hold(q(s,'.c2'),{opacity:'0'});}};}
   case 'photos-close':return{steps:[stag(220,qa(s,'.photo-wrap').map(d=>fade(d,500,10))),fade(q(s,'.s2'),500,8)]};
   case 'close':return{steps:[par(wipe(q(s,'.logo')),lag(250,settle(h1)),lag(500,fade(q(s,'.hero'),800,14))),fade(q(s,'.s2'),500,8),fade(q(s,'.s3'),500,8)]};
