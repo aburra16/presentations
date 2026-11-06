@@ -5,7 +5,7 @@ from pptx.util import Emu, Inches
 from lxml import etree
 
 S=json.load(open('states.json'))
-SITE='../site/bitfest-2026/'
+SITE='../bitfest-2026/'
 prs=Presentation(); prs.slide_width=Inches(13.333); prs.slide_height=Inches(7.5)
 W,H=prs.slide_width,prs.slide_height
 blank=prs.slide_layouts[6]
