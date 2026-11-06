@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Find the humans — BitFest 2026</title>
+<meta name="description" content="Avi Burra's Nostrshire keynote at BitFest Manchester, 20 November 2026.">
+<style>
+@font-face{font-family:Figtree;src:url(assets/fonts/Figtree.ttf) format('truetype');font-weight:300 900;font-display:swap}
+@font-face{font-family:Plex;src:url(assets/fonts/Plex.ttf) format('truetype');font-weight:500;font-display:swap}
+:root{--ink:#0A0E18;--purple:#7237FF;--cyan:#13D2E5;--white:#F2F3F0;--text2:#4A5060;--text3:#7F8794;--rule:#C8CAD2;--deep:#2B174F}
+*{box-sizing:border-box}html,body{margin:0;background:#000;height:100%;overflow:hidden}
+body{font-family:Figtree,sans-serif;font-weight:500;color:var(--ink);-webkit-font-smoothing:antialiased}
+body.nocur{cursor:none}
+.slide{width:1600px;height:900px;padding:44px 72px 0;position:fixed;left:50%;top:50%;margin:-450px 0 0 -800px;transform:scale(var(--s,1));overflow:hidden;display:none;flex-direction:column;
+  background:#fff;background-image:radial-gradient(ellipse 60% 50% at 18% 22%,rgba(19,210,229,.14),transparent 60%),radial-gradient(ellipse 50% 45% at 82% 18%,rgba(114,55,255,.10),transparent 60%),radial-gradient(ellipse 70% 40% at 60% 100%,rgba(43,23,79,.08),transparent 60%)}
+.slide.cur{display:flex}
+.slide.dark{background:var(--ink);background-image:radial-gradient(ellipse 50% 50% at 85% 10%,rgba(43,23,79,.9),transparent 60%),radial-gradient(ellipse 60% 40% at 10% 100%,rgba(19,210,229,.08),transparent 60%);color:var(--white)}
+.top{display:flex;justify-content:space-between;align-items:center;font-family:Plex,monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);min-height:40px}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:60px}
+.foot{position:absolute;left:72px;right:72px;bottom:34px;display:flex;justify-content:space-between;font-family:Plex,monospace;font-size:14px;letter-spacing:.06em;color:var(--text3)}
+h1{font-size:76px;font-weight:500;letter-spacing:-.026em;line-height:1.02;margin:0;max-width:1400px}
+h1.big{font-size:120px;letter-spacing:-.03em}h1.huge{font-size:150px;letter-spacing:-.035em;line-height:.98}
+h2{font-size:60px;font-weight:500;letter-spacing:-.024em;line-height:1.05;margin:0;max-width:1300px}
+.hi{color:var(--purple)}.dark .hi{color:var(--cyan)}
+.sub{font-size:27px;line-height:1.4;color:var(--text2);margin:22px 0 0;max-width:1300px}.dark .sub{color:#B5BAC3}
+.kick{font-family:Plex,monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.meta{font-size:20px;color:var(--text2);margin-top:26px}.dark .meta{color:#B5BAC3}
+.wm{width:300px;height:68px;object-fit:contain}
+.side{display:flex;flex-direction:row;align-items:center;gap:40px}.side .txt{flex:1}.side .cast{flex:none}
+.cast svg{display:block}
+.cameo{position:absolute;right:72px;top:50%;transform:translateY(-44%);width:560px}.cameo svg{width:100%;height:auto}
+.with-cameo .mid{padding-right:600px}
+/* photos */
+.photo-wrap{position:absolute;inset:0;background:#161B2A}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-wrap img.missing{display:none}
+.photo-wrap .ph{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#B5BAC3;font-size:28px}
+.photo-wrap .ph small{font-family:Plex,monospace;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.photo-wrap.missing .ph{display:flex}
+.year{position:absolute;left:72px;bottom:60px;font-family:Plex,monospace;font-size:40px;letter-spacing:.14em;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+/* framed photos */
+.pframe{position:relative;width:1240px;height:700px;border-radius:24px;overflow:hidden;background:#161B2A;box-shadow:0 36px 90px rgba(43,23,79,.4);margin:0 auto}
+.pframe img{width:100%;height:100%;object-fit:cover;display:block}
+.pframe img.missing{display:none}
+.pframe .wash{position:absolute;inset:0;background:linear-gradient(135deg,rgba(43,23,79,.28),transparent 50%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);border-radius:24px}
+.pframe .ph{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#B5BAC3;font-size:28px}
+.pframe .ph small{font-family:Plex,monospace;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.pframe.missing .ph{display:flex}
+.pyear{position:absolute;left:180px;bottom:52px;font-family:Plex,monospace;font-size:22px;letter-spacing:.14em;color:#B5BAC3}
+/* footage */
+.frame{position:relative;width:1252px;height:700px;border-radius:24px;overflow:hidden;background:#161B2A;box-shadow:0 30px 80px rgba(43,23,79,.25);border:1px solid rgba(10,14,24,.08)}
+.frame video{width:100%;height:100%;object-fit:cover;display:block}
+.frame .ph{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#B5BAC3;font-size:26px;text-align:center;padding:40px}
+.frame .ph small{font-family:Plex,monospace;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.frame.missing .ph{display:flex}.frame.missing video{display:none}
+.tag-real{color:var(--purple)}
+/* statements */
+.lines h1{margin-top:0}
+.words h1{font-size:150px;letter-spacing:-.035em;line-height:1;margin:0 0 18px}
+/* cards */
+.card{background:#fff;border:1px solid var(--rule);border-radius:16px;padding:40px;width:860px;box-shadow:0 8px 24px rgba(10,14,24,.08)}
+.card.glow{box-shadow:0 24px 80px rgba(114,55,255,.18)}
+.card h3{font-size:46px;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin:10px 0 6px}
+.card .m{font-size:22px;color:var(--text2)}
+.card hr{border:0;border-top:1px solid #E6E7EA;margin:26px 0 22px}
+.faces{display:flex;align-items:center;gap:22px}.faces .pile{display:flex}
+.faces .av{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;font-weight:600;border:3px solid #fff;margin-left:-14px}
+.faces .av:first-child{margin-left:0}
+.faces p{font-size:26px;line-height:1.3;margin:0}
+.chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:22px;padding:10px 22px;border-radius:999px;border:1px solid var(--rule);background:#F2F3F0;color:var(--ink)}
+.chip.on{background:var(--purple);border-color:var(--purple);color:#fff;font-weight:600}
+.chip.add{background:#fff;border-style:dashed;color:var(--text3)}
+.chip.add .typed{color:var(--ink)}
+.prof{display:flex;align-items:center;gap:20px}.prof .av{width:84px;height:84px;border-radius:50%;background:var(--deep);object-fit:cover;display:block}
+.prof h3{margin:0}.prof .m{font-family:Plex,monospace;font-size:16px;color:var(--text3)}
+.cap{position:absolute;left:72px;right:72px;bottom:90px;text-align:center;font-size:26px;color:var(--text2)}
+.dark .cap{color:#B5BAC3}
+/* three things */
+.three{display:flex;flex-direction:column;gap:46px}.three div{display:flex;gap:34px;align-items:baseline}
+.three .n{font-family:Plex,monospace;font-size:24px;color:var(--cyan);width:60px}.three h2{font-size:72px}
+/* spam, scams, slop */
+#sss .pre{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center}
+#sss .then{font-size:44px;color:#C8CAD2;margin:0}
+.sss{display:grid;grid-template-columns:repeat(3,440px);gap:48px;justify-content:center;align-items:end}
+.sss .col{display:flex;flex-direction:column;align-items:center;gap:30px}
+.sss .w{font-size:96px;letter-spacing:-.03em;line-height:1;margin:0}
+.panel{width:440px;height:560px;border-radius:24px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(43,23,79,.35)}
+.panel::after{content:"";position:absolute;inset:0;border-radius:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
+.panel.spam{background:#fff;color:var(--ink);padding:28px 30px}
+.spam .ptop{display:flex;flex-direction:column;gap:6px;border-bottom:1px solid #E6E7EA;padding-bottom:18px;margin-bottom:8px}
+.spam .pname{font-size:28px;font-weight:600;letter-spacing:-.01em}
+.spam .stars{font-size:20px;color:#E0A100}.spam .stars b{color:var(--ink);font-weight:600;margin-right:4px}.spam .stars small{font-size:16px;color:var(--text3);margin-left:6px}
+.spam .rv{padding:14px 0;border-bottom:1px solid #EEF0F2;display:grid;grid-template-columns:1fr auto;row-gap:4px}
+.spam .rv .who{font-size:17px;font-weight:600}.spam .rv .when{font-family:Plex,monospace;font-size:14px;color:var(--text3)}
+.spam .rv p{grid-column:1/3;margin:0;font-size:19px;line-height:1.3;color:var(--text2)}
+.spam .rv p::before{content:"★★★★★ ";color:#E0A100;font-size:15px;letter-spacing:1px}
+.panel.phone{background:#000;color:#fff;padding:24px 22px;display:flex;flex-direction:column;gap:10px;font-family:-apple-system,"SF Pro Text","Helvetica Neue",Figtree,sans-serif}
+.phone .phdr{display:flex;flex-direction:column;align-items:center;gap:8px;border-bottom:1px solid #1C1C1E;padding-bottom:14px;margin-bottom:6px}
+.phone .pav{width:52px;height:52px;border-radius:50%;background:#8E8E93}
+.phone .pnum{font-size:17px;color:#fff}
+.phone .pwhen{text-align:center;font-size:13px;color:#8E8E93;margin-top:8px}
+.phone .bub{align-self:flex-start;max-width:88%;background:#26252A;color:#fff;border-radius:22px;border-bottom-left-radius:6px;padding:12px 16px;font-size:19px;line-height:1.3;margin-top:8px}
+.phone .bub u{color:#4C8DFF}
+.panel.slop{background:#fff;color:var(--ink);padding:26px 28px}
+.slop h4{font-size:24px;font-weight:700;line-height:1.15;letter-spacing:-.01em;margin:0 0 8px;font-family:Georgia,"Times New Roman",serif}
+.slop .by{font-size:13px;color:var(--text3);margin-bottom:12px}
+.slop .hero{height:140px;background:#EEF0F2;border-radius:8px;overflow:hidden;margin-bottom:10px}.slop .hero img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;display:block}
+.slop .jump{display:inline-block;font-size:14px;font-weight:600;color:#fff;background:#E25C3A;border-radius:6px;padding:6px 12px;margin-bottom:12px}
+.slop h5{font-size:17px;font-weight:700;margin:12px 0 6px;font-family:Georgia,"Times New Roman",serif}
+.slop .ln{height:9px;border-radius:5px;background:#D8DAE0;margin:6px 0}
+.slop .ad{margin:12px 0 4px;height:46px;border:1px dashed #C8CAD2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:Plex,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+/* flight map */
+.map{position:absolute;left:72px;top:150px;width:880px;height:640px}.map svg{display:block}
+/* chain */
+.chain{position:relative}
+.chain .labels{display:grid;grid-template-columns:repeat(4,1fr);width:1456px;margin-top:-10px}
+.chain .labels.two{grid-template-columns:repeat(2,1fr);width:728px;margin-left:364px}
+.chain .line{margin-top:48px;font-size:56px;text-align:center}
+.chain .q{margin-top:36px;font-size:52px;text-align:center;max-width:1180px;margin-left:auto;margin-right:auto}.chain .q2{font-size:88px;text-align:center;margin-top:8px}.chain .last{text-align:center;margin-top:18px}
+.chain .labels div{position:relative;height:60px}
+.chain .labels p{position:absolute;left:0;right:0;top:0;margin:0;text-align:center;font-family:Plex,monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.chain .labels p.b{font-family:Figtree,sans-serif;font-size:26px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--white);top:-4px}
+.chain .labels p.s{top:34px}
+.m-wire{position:absolute;left:0;bottom:-12px;height:2px;background:var(--ink);transform-origin:0 50%}
+.dark .m-wire{background:var(--white)}
+.m-caret{display:inline-block;width:.5em;height:1.05em;vertical-align:-.15em;background:var(--purple)}
+.m-blink{transform-box:fill-box;transform-origin:50% 50%}
+.m-bs{transform-box:fill-box;transform-origin:6% 100%}
+aside.m-notes{display:none}
+#notes{position:fixed;left:24px;right:24px;bottom:24px;max-width:1100px;margin:0 auto;background:#0A0E18;color:#fff;border:1px solid #2B3242;border-radius:14px;padding:18px 26px;font:500 18px/1.45 Figtree,sans-serif;z-index:20;display:none}
+#notes.on{display:block}
+#dip{position:fixed;inset:0;background:#0A0E18;opacity:0;pointer-events:none;z-index:10}
+#hint{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);font:500 13px Plex,monospace;letter-spacing:.08em;color:#7F8794;opacity:0;transition:opacity .4s;z-index:21;pointer-events:none}
+body.show-hint #hint{opacity:1}
+@media print{html,body{overflow:visible;background:#fff}.slide{display:flex;position:relative;left:0;top:0;margin:0;transform:none;break-after:page}#notes,#hint{display:none!important}}
+</style>
+</head>
+<body>
+
+<!-- 00 cover -->
+<section class="slide" id="cover">
+  <div class="top"><span>Nostrshire · BitFest Manchester · 20 November 2026</span><img class="wm logo" src="assets/img/wordmark.svg" alt="Brainstorm"></div>
+  <div class="mid side">
+    <div class="txt">
+      <h1 class="big">Find the <span class="hi">humans</span>.</h1>
+      <p class="sub">A talk about Prague, a town in South America, and what the internet forgot.</p>
+      <p class="meta"><b>Avi Burra</b> · NosFabrica</p>
+    </div>
+    <div class="cast cover-cast"><svg viewBox="0 0 720 320" width="720" height="320" xmlns="http://www.w3.org/2000/svg" data-cast="avi:60,50|agent:250,50|robot-agent:480,50"></svg></div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Title slide. Up while you walk on. Say nothing about it.</aside>
+</section>
+
+<!-- 01 intro -->
+<section class="slide with-cameo" id="intro">
+  <div class="top"><span>Intro</span></div>
+  <div class="mid">
+    <h1 class="big">Avi Burra</h1>
+    <p class="sub l1">NosFabrica</p>
+    <p class="sub l2">Twenty years of software, a lot of it in distributed systems, where the question was always: who do you trust with something that matters.</p>
+    <p class="sub l3">Surrealist fiction, when nobody’s looking.</p>
+  </div>
+  <div class="cameo"><svg viewBox="0 0 560 320" width="560" height="320" xmlns="http://www.w3.org/2000/svg" data-cast="avi-wave:120,40" data-bubble="avi-wave:330,0:Good morning."></svg></div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Good morning. I’m Avi. Twenty years building software, a lot of it in distributed systems, where the question was always: who do you trust with something that matters. NosFabrica. Surrealist fiction when nobody’s looking.</aside>
+</section>
+
+<!-- 02 wink -->
+<section class="slide dark" id="wink">
+  <div class="top"><span>The programme says</span></div>
+  <div class="mid">
+    <h1 class="big">Agentic <span class="hi">Reputations</span>.</h1>
+    <p class="sub s2" style="font-size:34px">We’ll get there. But first, a restaurant.<span class="s3"> Then my teenage son.</span></p>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">The programme says this talk is called Agentic Reputations. We’ll get there, I promise. [click] But first, a story about a restaurant. [click] Then a story about my teenage son. [long pause]</aside>
+</section>
+
+<!-- 03 transition: the restaurant -->
+<section class="slide dark" id="the-restaurant">
+  <div class="top"><span>Prague, 2023</span></div>
+  <div class="mid"><h1 class="huge">The <span class="hi">restaurant</span>.</h1></div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">In 2023 I went to Prague for the first time. I was there for a conference, I didn’t know the city, and I did what everyone does: I opened my phone. Forty restaurants came up. Stars on all of them. I picked one with a five star rating for my first dinner in Prague. [pause] It wasn’t great. The next day I spoke to my friend Libor, who lives there. He told me to go to a restaurant called Červený Jelen. It hadn’t come up in my search the previous evening, but Libor said, “trust me, you won’t regret it.” He was right. It was spectacular.</aside>
+</section>
+
+<!-- 03-05 photos -->
+<section class="slide dark photo" id="photo-2023">
+  <div class="mid" style="padding-bottom:90px"><div class="pframe"><img src="assets/photos/2023.jpg" alt="Červený Jelen, Prague, 2023" style="object-position:50% 42%"><div class="wash"></div><div class="ph"><small>Photo slot</small>assets/photos/2023.jpg</div></div></div>
+  <div class="pyear">2023 · ČERVENÝ JELEN, PRAGUE</div>
+  <aside class="m-notes">[photo] That was 2023.</aside>
+</section>
+<section class="slide dark photo" id="photo-2024">
+  <div class="mid" style="padding-bottom:90px"><div class="pframe"><img src="assets/photos/2024.jpg" alt="Červený Jelen, Prague, 2024" style="object-position:50% 50%"><div class="wash"></div><div class="ph"><small>Photo slot</small>assets/photos/2024.jpg</div></div></div>
+  <div class="pyear">2024 · THE STEAK</div>
+  <aside class="m-notes">[photo] I went back in 2024.</aside>
+</section>
+<section class="slide dark photo" id="photo-2025">
+  <div class="mid" style="padding-bottom:90px"><div class="pframe"><img src="assets/photos/2025.jpg" alt="Červený Jelen, Prague, 2025" style="object-position:50% 50%"><div class="wash"></div><div class="ph"><small>Photo slot</small>assets/photos/2025.jpg</div></div></div>
+  <div class="pyear">2025 · THIRD TIME</div>
+  <aside class="m-notes">[photo] And in 2025. [pause] Nobody goes back to a search result three years running.</aside>
+</section>
+
+<!-- 06 libor -->
+<section class="slide dark with-cameo" id="libor">
+  <div class="top"><span>Prague, 2023</span></div>
+  <div class="mid lines">
+    <h1 class="big l1">I didn’t know Prague.</h1>
+    <h1 class="big l2">I knew <span class="hi">Libor</span>.</h1>
+  </div>
+  <div class="cameo"><svg viewBox="0 0 560 320" width="560" height="320" xmlns="http://www.w3.org/2000/svg" data-cast="libor:0,40" data-bubble="libor:240,0:Trust me.|You won’t regret it."></svg></div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">I didn’t know Prague. [click] I knew Libor. [long pause] Then: Now a harder one.</aside>
+</section>
+
+<!-- transition: my teenage son -->
+<section class="slide dark" id="my-son">
+  <div class="top"><span>This summer</span></div>
+  <div class="mid"><h1 class="huge">My teenage <span class="hi">son</span>.</h1></div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Now a harder one. [click: the map]</aside>
+</section>
+
+<!-- 06b flight -->
+<section class="slide with-cameo" id="flight">
+  <div class="top"><span>This summer</span></div>
+  <div class="map"><svg viewBox="0 0 880 640" width="880" height="640" xmlns="http://www.w3.org/2000/svg">
+    <path class="land" d="M578.9,624.9L586.5,626.4L594.6,626.8L592.0,628.3L586.5,628.6L583.6,627.8L581.7,628.9L576.7,630L570.5,629.8L566.2,629.1L560.2,628.8L552.8,627.3L546.9,625.9L538.9,622.7L543.7,623.3L551.8,625.1L559.5,626.0L562.5,624.6L564.3,622.6L569.6,621.2L573.7,621.5L575.9,622.8ZM631.6,614.4L636.3,615.5L634.6,616.7L626.9,618.0L624.2,617.1L619.4,618.7L616.5,617.5L623.3,615.3L628.2,615.8ZM603.8,325.0L599.7,325.8L598.8,325.3L600.1,323.7L599.9,321.5L602.7,320.6L603.7,320.7ZM579.2,280.1L578.0,281.5L574.4,281.6L571.6,281.9L571.2,279.5L571.9,278.6L575.8,278.6L578.3,279.0ZM524.9,283.1L523.5,284.1L520.8,283.2L518.0,281.1L518.6,279.8L520.6,279.4L521.7,279.6L524.9,280.1L527.5,281.5L528.3,283.0ZM545.5,271.7L549.7,272.5L550.2,271.5L554.0,271.5L556.8,272.9L558.1,272.7L559.0,274.7L561.6,274.5L561.5,276.2L563.6,276.3L566.0,278.3L564.3,280.6L562.0,279.5L559.8,279.8L558.2,279.5L557.4,280.6L555.6,281.0L554.8,279.6L553.2,280.5L551.4,284.3L550.1,283.5L549.9,281.9L546.7,281.0L544.4,281.4L541.5,281.0L539.2,282.1L536.6,280.4L537.0,278.6L541.5,279.3L545.1,279.7L546.8,278.4L544.6,276.0L544.6,273.9L541.6,273.0L542.6,271.5ZM151.5,235.5L150.6,236.2L149.6,235.2L150.1,233.7L149.8,231.5L150.1,231.0L151.1,230.3L151.1,229.1L151.4,228.7L151.8,228.9L153.4,230.2L154.1,230.8L154.7,231.7L155.4,233.9L155.2,234.2L153.2,235.0ZM150.9,226.4L149.2,226.4L148.7,225.1L148.3,224.5L148.3,224.2L148.9,223.8L150.4,224.7L151.4,225.8ZM148.4,222.8L148.1,223.3L145.7,222.6L146.2,222.0ZM144.4,221.0L144.1,221.3L143.8,221.2L142.2,220.6L141.9,219.2L141.8,219.0L143.2,218.5L143.5,218.9ZM137.4,215.6L136.8,216.0L135.5,214.7L135.8,214.4L136.6,214.0L137.7,214.4ZM511.7,255.7L513.6,257.8L518.0,257.2L519.7,258.5L523.7,261.9L526.7,264.4L528.2,264.3L531.1,265.4L530.7,267.0L534.2,267.2L537.9,269.5L537.3,270.8L534.1,271.5L530.9,271.8L527.6,271.4L520.8,272.0L524.0,268.9L522.1,267.4L519.0,267.0L517.3,265.4L516.2,262.2L513.5,262.5L509.1,260.9L507.7,259.8L501.5,258.8L499.9,257.7L501.7,256.4L497.0,256.0L493.6,258.9L491.7,258.9L490.9,260.3L488.6,260.8L486.6,260.3L489.1,258.6L490.2,256.6L492.3,255.4L494.8,254.4L498.3,253.9L499.5,253.3L503.6,253.7L507.3,253.8ZM521.8,250.3L520.7,250.5L519.5,247.4L517.7,245.8L518.7,242.3L520.2,242.5L521.8,247.1ZM520.5,234.8L515.4,235.7L515.1,233.7L517.3,233.2L520.3,233.4ZM524.3,234.7L523.5,238.6L522.7,237.9L522.7,235.1L520.6,232.9L520.6,232.3ZM582.5,133.3L585.7,133.8L589.7,133.5L587.6,135.4L586.0,135.8L580.4,134.1L579.2,132.7L580.8,131.2ZM590.1,121.8L588.0,122.0L582.3,120.9L578.2,119.1L579.7,118.7L585.4,119.5L589.9,121.1ZM321.8,113.2L319.6,113.5L312.7,110.6L311.7,108.9L308.0,106.9L307.4,105.6L303.1,104.2L301.8,101.7L302.3,100.8L306.6,102.4L309.2,103.4L313.2,104.4L314.4,106.0L316.3,108.3L320.4,110.6ZM614.3,113.9L611.7,117.7L614.4,116.1L617.4,116.8L615.9,118.4L619.9,119.3L621.8,118.1L626.2,119.1L625.1,122.4L628.1,121.4L628.8,123.7L630.4,126.3L628.8,130.3L626.8,130.6L623.9,129.9L624.6,126.3L623.4,125.8L618.5,130.0L615.9,130.0L618.9,127.7L614.6,126.9L609.9,127.4L601.5,127.8L600.7,126.5L603.4,124.9L601.4,123.8L604.9,121.0L609.0,114.0L611.6,111.5L615.2,109.9L617.2,110L616.5,111.1ZM285.7,85.0L289.8,85.4L287.8,89.6L291.0,93.3L289.3,93.1L287.1,90.9L285.8,88.8L283.8,87.3L283.3,85.4L283.7,84.2ZM202.4,57.8L198.0,58.2L196.1,56.8L195.8,55.0L199.8,54.6L202.2,54.6L204.9,55.4L206.4,56.9ZM152.7,36.0L150.1,35.9L147.5,34.6L145.3,33.0L149.5,33.5L152.6,34.7ZM514.3,74.7L512.7,76.3L510.8,76.1L509.7,75.1L509.9,74.9L511.5,74.0L513.2,74.0ZM503.2,72.9L498.3,74.5L495.3,74.4L494.4,73.5L497.6,72.2L503.3,72.3ZM489.7,64.0L490.4,65.2L492.6,64.8L495.0,65.6L499.6,66.7L504.4,67.6L504.7,69.0L507.8,68.8L510.8,69.8L507.1,70.8L500.5,70.0L498.2,68.6L494.0,70.1L488.0,71.6L486.6,69.8L480.9,69.9L484.6,68.5L485.2,66.2L486.7,63.7ZM528.5,60.2L523.9,60.3L522.8,59.1L524.6,57.6L528.4,57.2L531.7,57.9L531.7,59.0L531.2,59.4ZM446.3,53.4L443.7,54.1L438.1,53.1L434.7,53.1L429.1,51.7L432.8,51.2L435.8,50.3L440.1,51.3L442.6,51.8L443.8,52.3ZM467.5,53.4L467.4,55.9L473.0,54.1L478.0,55.8L476.7,57.7L480.7,59.6L485.0,57.8L488.1,55.7L488.4,53.0L494.3,53.3L500.4,53.8L506.0,55.0L506.3,56.3L503.1,57.6L506.1,59.0L505.5,60.2L497.3,62.0L491.5,62.3L487.2,61.4L485.9,62.8L481.8,65.0L480.6,66.3L475.7,68.1L469.7,68.1L466.3,69.2L466.0,71.2L461.1,71.4L455.8,73.7L451.1,77.1L449.3,79.7L448.9,83.6L455.1,84.5L456.9,87.8L458.7,90.6L464.7,90.1L472.6,92.0L476.8,93.5L479.8,95.3L485.1,96.5L489.6,98.2L496.7,98.5L501.3,99.0L500.6,102.3L501.9,106.2L505.0,110.7L511.4,114.6L514.7,113.3L517.0,109.2L514.8,102.9L511.8,100.9L518.7,99.1L523.5,96.5L525.9,93.9L525.5,91.4L522.6,88.4L517.4,85.8L522.4,82.2L520.6,79.2L519.2,74.2L522.1,73.5L529.3,74.3L533.7,74.5L537.2,73.7L541.1,74.7L546.3,76.5L547.6,77.7L555.1,77.8L555.1,80.5L556.6,84.8L560.5,85.2L563.6,87.2L569.7,85.1L573.6,81.2L576.4,79.5L579.8,82.4L585.5,86.6L590.4,90.6L588.8,93.0L594.6,94.8L598.5,96.8L605.4,97.4L608.2,98.4L610.1,101.6L613.5,101.9L615.3,103.3L615.9,107.8L612.8,109.5L609.8,111.1L602.8,113.0L597.5,116.7L590.2,117.7L580.9,117.2L574.4,117.4L570.0,117.9L566.4,121.0L560.9,123.1L554.8,129.0L549.8,133.1L553.5,132.3L560.4,126.4L569.4,122.5L575.9,121.9L579.9,123.8L575.9,126.9L577.4,131.6L579.0,134.9L584.8,136.9L592.0,135.9L596.1,130.7L596.6,133.9L599.5,135.4L594.2,138.6L584.6,141.8L580.3,143.8L575.5,147.3L572.1,147.1L571.8,143.2L579.4,139.1L572.3,139.5L567.4,140.3L568.2,141.7L563.6,144.1L559.1,145.8L554.5,147.3L552.0,150.4L551.5,151.2L551.5,153.7L553.0,156.2L554.9,156.2L554.3,154.5L555.7,155.5L555.4,156.9L552.4,157.8L550.3,157.7L547.0,158.6L545.0,158.9L542.5,159.1L538.8,160.6L545.3,159.6L546.6,160.5L540.4,162.0L537.6,162.1L537.7,161.5L536.4,162.8L537.7,163.0L536.7,166.5L533.5,170.4L533.2,169.1L532.2,168.8L530.7,167.6L531.7,170.3L532.7,171.1L532.9,173.0L531.4,174.9L528.9,179.0L528.5,178.8L529.9,175.3L527.6,173.5L527.0,169.4L526.2,171.5L527.2,174.6L524.3,173.9L527.3,175.5L527.5,180.2L528.8,180.6L529.3,182.3L529.9,187.4L527.1,191.2L522.4,192.7L519.4,195.8L517.1,196.1L514.8,198.0L514.1,199.7L509.1,203.1L506.5,205.6L504.3,208.7L503.6,212.4L504.4,216.1L505.8,220.7L507.9,224.5L507.9,226.9L510.1,233.1L509.9,236.8L509.7,238.9L508.5,242.3L507.1,243L504.8,242.3L504.0,239.9L502.3,238.6L499.9,233.9L497.7,229.7L497.1,227.6L498.1,224.0L496.8,221.0L493.3,216.5L491.5,215.7L486.8,218.0L486.0,217.7L483.8,215.2L480.9,213.8L475.7,214.3L471.6,213.6L468.1,213.9L466.1,214.6L467.0,216.1L466.8,218.3L467.7,219.3L466.8,220.0L465.2,219.2L463.4,220.1L460.0,219.8L456.7,216.9L452.6,217.4L449.3,216.0L446.4,216.3L442.5,217.3L438.1,221.1L433.4,223.2L430.7,225.6L429.5,228.0L429.2,231.7L429.3,234.3L430.1,236.2L430.1,236.3L430.1,236.3L428.0,240.9L427.0,244.8L426.2,252.2L425.6,254.9L426.3,258.0L427.6,260.7L428.3,265.1L431.2,269.4L432.2,272.7L433.9,275.5L438.9,277.3L440.8,279.7L445.1,278.4L448.8,277.9L452.4,277.1L455.4,276.2L458.6,274.1L459.8,270.8L460.4,266.2L461.2,264.6L464.5,263.2L469.6,262.1L473.8,262.4L476.7,262.0L477.8,263.2L477.6,265.9L474.9,269.1L473.7,272.5L474.5,273.5L473.8,275.9L472.4,280.3L471.3,278.8L470.3,278.8L470.2,279.7L471.2,279.7L471.0,281.3L470.2,283.7L470.6,284.5L470.0,286.5L470.3,287.1L469.7,289.9L468.7,291.4L467.8,291.5L466.8,293.5L468.3,294.5L468.8,293.7L470.2,294.5L470.7,294.7L471.7,293.7L473.1,293.7L473.6,294.2L474.3,293.9L476.6,294.5L478.8,294.4L480.4,293.8L480.9,293.2L482.5,293.5L483.6,293.9L484.9,293.8L485.9,293.3L488.1,294.2L488.8,294.3L490.3,295.4L491.7,296.7L493.4,297.6L494.7,299.1L494.2,299.7L494.0,300.9L494.4,303.0L493.3,304.9L492.7,307.2L492.5,309.7L492.8,311.2L492.9,313.7L492.1,314.3L491.6,316.7L491.9,318.2L490.9,319.6L491.1,321.2L491.8,322.1L493.0,325.2L494.9,327.5L497.2,330.0L498.9,332.0L498.8,333.2L500.8,333.5L501.3,333.0L502.6,334.4L505.0,334.1L507.2,332.6L510.2,331.5L511.9,329.8L514.6,330.2L514.4,330.7L517.2,330.9L519.4,331.9L521.0,333.6L522.9,335.2L525.4,335.4L529.1,331.4L531.1,330.8L531.2,328.9L532.0,324.1L534.8,321.4L537.9,321.3L538.3,320.1L542.2,320.5L546.0,317.6L547.9,316.3L550.2,313.6L551.9,313.9L553.3,315.3L552.3,317.3L552.2,318.6L549.4,319.3L551.0,321.9L551.0,324.8L548.9,328.2L550.8,332.6L553.0,332.2L554.0,328.1L552.4,326.1L552.1,321.9L558.2,319.4L557.4,316.8L559.1,314.9L561.0,318.9L564.4,318.9L567.7,322.0L567.9,323.8L572.3,323.8L577.6,323.0L580.5,325.4L584.3,326.0L587.0,324.1L587.0,322.7L593.1,322.1L599.0,321.8L594.8,323.6L596.7,326.2L600.6,326.5L604.5,329.1L605.5,333.6L608.1,333.3L610.1,334.6L613.4,336.5L616.7,340.0L617.0,342.9L618.9,342.9L621.7,345.5L623.8,347.4L629.8,348.1L630.3,347.1L634.3,346.4L639.8,347.6L641.5,348.1L645.3,349.1L650.9,353.5L651.9,355.8L653.6,355.4L655.1,358.4L658.7,368.0L661.5,368.7L661.9,372.5L658.5,377.4L660.2,378.9L669.2,379.1L669.9,384.6L673.4,380.7L680.0,382.1L688.8,384.7L691.6,387.7L691.0,390.8L696.8,388.5L707.0,390.4L714.6,389.4L722.7,393.1L730.0,398.5L734.1,399.6L738.5,399.3L740.6,400.7L743.2,407.4L744.4,410.6L743.5,419.6L741.2,423.4L734.8,431.7L732.1,438.0L728.7,442.9L727.5,443.2L726.4,447.2L727.9,456.7L727.3,464.7L727.0,468.1L725.6,470.2L725.4,477.0L720.6,484.0L720.2,489.1L716.1,491.6L715.1,494.7L709.2,495.2L700.9,497.9L697.3,500.4L691.3,502.3L685.3,506.6L681.0,511.7L680.5,515.2L681.6,517.7L681.0,522.4L680.0,524.7L676.3,527.5L670.8,535.7L666.2,539.6L662.6,541.9L660.4,546.1L656.9,548.8L654.6,551.6L648.5,554.4L644.3,553.8L641.3,554.4L636.1,553.0L632.3,553.3L628.8,551.2L628.5,553.4L635.8,556.6L635.2,559.4L638.8,561.0L638.6,563.0L633.6,568.5L625.3,571.0L614.1,572.4L607.9,572.3L609.2,574.6L608.2,577.5L609.3,579.4L605.9,580.9L600.2,581.7L594.7,580.5L592.5,581.6L593.5,585.3L597.3,586.2L600.4,585.0L602.1,586.8L597.0,588.2L592.5,590.6L591.8,594.2L590.5,596.2L585.1,596.4L580.7,598.3L579.2,600.9L584.9,603.3L590.4,603.8L588.5,606.8L581.8,608.9L578.2,612.8L572.9,614.2L570.6,615.7L572.6,618.9L576.5,620.5L574.0,620.4L568.9,620.6L566.1,621.4L561.0,622.5L560.1,625.3L557.6,625.4L551.1,624.6L544.5,622.6L537.3,621.0L535.4,619.1L537.1,617.3L534.1,615.2L533.4,609.7L535.8,606.5L541.8,603.9L533.1,603.0L538.5,599.9L540.4,594.0L546.7,595.2L549.6,587.6L545.8,586.7L544.1,591.3L540.5,590.8L542.2,585.5L544.1,578.5L546.6,575.8L545.0,572.0L544.4,567.5L546.8,567.3L550.1,560.7L553.9,553.9L556.1,547.5L554.7,541.0L556.3,537.3L555.5,531.8L558.7,526.2L559.5,517.3L561.0,507.4L562.5,496.6L561.9,488.5L560.6,481.5L555.2,478.7L554.7,476.7L544.0,471.7L534.4,466.2L530.2,463.1L528.0,458.8L528.9,457.3L524.4,450.5L519.1,440.7L514.2,430.0L512.1,427.6L510.5,423.6L506.5,420.0L502.8,417.8L504.5,415.4L502.0,410.1L503.7,406.3L507.8,402.9L510.5,398.8L509.4,396.3L507.5,398.9L504.4,396.5L505.5,394.9L504.6,389.9L506.4,389.0L507.4,385.6L509.4,382.0L509.0,379.7L511.8,378.5L515.3,376.3L514.6,374.6L516.5,374.2L516.3,371.3L517.5,369.3L520.0,368.9L522.1,365.4L524.0,362.4L522.2,361.1L523.1,357.8L522.0,352.7L523.0,351.2L522.2,346.4L520.2,343.4L518.6,341.8L517.5,338.7L518.7,337.2L517.5,336.8L516.6,334.9L514.1,333.3L511.9,333.7L510.9,335.6L508.9,337.1L507.8,337.3L507.3,338.4L509.7,341.5L508.3,342.2L507.6,343.1L505.3,343.3L504.4,339.9L503.8,340.9L502.1,340.6L501.2,338.3L499.1,337.9L497.9,337.2L495.7,337.2L495.6,338.4L495.0,337.5L492.3,336.2L491.4,335.0L491.9,334.1L491.8,332.8L490.4,331.4L488.5,330.3L486.8,329.5L486.5,327.8L485.2,326.8L485.5,328.5L484.5,329.8L483.4,328.2L481.8,327.6L481.2,326.5L481.3,324.7L481.9,323.0L480.6,322.1L481.7,321.1L480.1,319.2L477.8,316.9L476.8,315L474.8,313.1L472.4,310.5L473.0,309.6L473.8,310.5L474.1,310.1L473.3,308.3L471.9,307.8L471.3,309.1L468.5,308.9L466.7,308.3L464.7,307.2L462.1,306.7L460.7,305.5L458.3,304.4L455.2,304.2L453.0,303.0L450.5,300.5L445.3,294.2L442.9,292.3L439.0,290.6L436.3,290.9L432.3,292.8L429.8,293.2L426.5,291.6L422.9,290.3L418.6,287.5L415.0,286.4L409.7,283.5L405.9,280.5L404.8,278.9L402.1,278.4L397.4,276.3L395.6,273.6L390.7,270.0L388.5,266.3L387.6,263.5L389.3,263.1L388.9,261.5L390.1,260.1L390.3,258.2L388.9,255.6L388.6,253.3L387.3,250.4L383.6,244.6L379.2,239.9L377.2,236.3L373.4,233.8L372.7,232.3L373.7,229.0L371.4,227.6L368.9,224.7L368.1,220.8L365.7,220.1L363.2,217.1L361.3,214.2L361.3,212.6L359.2,208.3L358.0,204.1L358.3,202.1L355.2,199.7L353.6,199.7L351.2,198.0L350.2,200.1L350.7,202.7L350.7,206.7L352.1,209.0L355.1,213.1L355.8,214.4L356.4,214.8L356.9,216.7L357.7,216.7L358.3,220.3L359.5,221.8L360.3,223.8L363.0,226.8L364.0,232.0L365.2,234.6L366.3,237.3L366.2,240.2L368.5,240.6L370.1,243.2L371.6,245.8L371.4,246.8L369.3,248.6L368.4,248.5L367.5,245.1L364.7,241.7L361.6,238.7L359.3,237.1L359.9,233.1L359.5,230.1L357.4,228.2L354.5,225.4L353.8,226.1L352.7,224.5L350.0,222.9L347.6,219.5L348.0,219.2L349.9,219.7L351.8,217.8L352.2,215.4L349.1,211.2L346.5,209.5L345.2,206.0L343.9,202.3L342.2,197.9L340.9,193.0L340.4,190.3L337.8,187.0L335.8,186.1L335.5,184.6L332.9,184.0L331.5,182.5L327.3,181.4L326.3,180.5L326.1,177.6L322.4,172.0L319.5,164.6L319.8,163.5L318.0,161.6L315.1,157.0L315.0,153.0L313.0,150.0L314.5,146.2L314.9,142.1L314.0,138.3L316.3,134.2L318.4,126.1L318.4,120.0L317.5,116.1L316.6,113.9L317.2,113.1L323.3,115.4L325.0,119.8L326.2,118.8L326.0,115.2L325.0,111.5L324.4,111.4L316.6,106.2L313.8,103.9L306.2,101.2L304.4,97.2L305.3,94.8L300.1,92.4L299.8,89.1L295.1,85.5L295.3,83.6L293.2,81.8L289.7,80.0L289.0,76.6L284.0,72.9L282.3,69.2L278.3,68.3L271.6,67.1L266.9,65.3L258.9,60.2L255.0,58.9L247.9,56.4L242.1,55.6L234.2,52.5L229.6,50.1L224.8,49.9L225.2,52.3L222.9,52.1L218.0,51.8L214.1,52.1L209.3,51.9L209.1,49.8L211.7,47.0L216.3,46.9L215.3,45.9L209.7,46.6L206.4,48.1L199.9,49.2L202.6,51.5L198.1,53.0L193.4,53.5L189.0,53.6L187.6,55.0L180.7,55.3L179.0,56.7L173.7,57.1L170.9,56.1L166.8,56.2L162.3,56.5L158.5,56.8L151.1,56.1L150.6,55.3L155.6,54.8L159.9,54.6L164.8,53.7L170.1,54.6L172.5,53.6L178.8,52.8L179.9,52.3L183.2,51.8L184.5,49.3L187.1,47.8L182.1,47.7L180.9,46.8L178.4,47.5L176.1,45.2L174.7,46.1L173.5,44.1L169.1,44.4L166.5,43.8L166.7,41.7L167.7,40.7L165.3,38.9L159.9,38.2L156.8,35.8L154.2,34.3L154.6,32.5L151.8,30.4L153.8,29.0L157.6,28.2L159.4,27.0L162.8,27.6L165.5,28.8L169.1,28.2L172.0,29.1L175.3,29.0L174.9,27.5L172.7,26.4L176.0,26.0L173.5,25.5L169.0,25.0L167.6,25.4L164.6,23.9L158.8,22.8L153.0,20.6L151.6,19.1L146.9,16.1L152.8,16.5L162.2,17.5L165.5,18.3L164.6,19.5L173.2,21.5L170.3,19.1L165.6,16.9L163.0,14.9L159.4,12.8L154.1,10.6L156.7,10L163.8,11.7L169.2,11.9L170.4,11.0L174.8,10.9L178.8,11.6L186.7,12.5L190.4,13.5L196.8,13.7L202.9,15.6L205.6,17.2L207.5,17.2L214.3,18.8L213.9,19.3L220.1,21.0L224.2,21.6L232.7,24.1L240.4,25.8L243.5,26.7L249.0,27.4L255.1,29.2L259.5,30.4L267.0,32.3L273.2,34.6L277.5,35.5L281.2,35.1L286.3,35.2L292.4,36.5L298.7,36.4L305.5,36.8L308.2,38.2L311.3,38.1L312.4,37.2L315.2,37.8L321.9,40.9L327.5,40.0L327.9,41.9L333.0,42.1L334.6,41.6L339.6,42.4L345.8,44.2L355.3,46.2L361.0,47.2L365.0,47.5L370.5,49.4L364.5,50.0L372.0,51.3L383.2,52.1L386.8,52.0L391.0,53.9L395.7,53.0L391.5,51.6L394.3,51.0L399.3,51.3L402.7,51.3L406.0,52.2L410.0,53.8L414.7,54.0L422.0,55.6L428.4,55.6L434.5,56.1L434.1,54.5L437.8,54.2L444.2,55.4L444.1,57.9L446.8,56.0L450.2,56.2L452.2,53.8L447.8,52.1L443.0,50.9L443.5,48.4L448.4,47.1L453.9,47.7L458.0,48.8L463.6,51.6L459.8,52.6ZM484.3,45.8L487.5,47.2L491.3,45.6L501.8,45.0L508.9,47.1L508.3,48.5L516.5,47.9L520.4,47.1L529.5,48.1L535.3,49.0L535.8,50.0L543.5,49.4L547.8,50.7L557.8,51.4L561.5,52.2L565.5,54.3L557.9,55.7L567.7,57.0L574.4,57.4L580.5,59.5L587.0,59.4L585.8,61.4L578.6,65.0L573.4,63.9L566.7,61.5L561.4,62.0L560.9,63.6L565.3,65.1L571.1,66.3L572.8,67.0L575.6,69.8L574.3,72.1L568.9,71.4L558.3,69.3L564.4,71.7L568.8,73.5L569.5,74.6L558.1,73.6L549.0,72.0L543.9,70.7L545.3,69.8L539.0,68.3L532.9,67.0L533.0,67.8L520.9,68.4L517.3,67.4L520.1,65.2L527.9,65.2L536.5,64.7L535.1,63.8L536.6,62.4L542,59.7L540.8,58.5L539.2,57.7L532.8,56.5L524.3,55.7L527.0,55.1L522.6,53.6L518.9,53.5L515.7,52.7L513.4,53.4L505.9,53.6L490.8,52.9L482.0,52.0L475.3,51.5L471.9,50.6L476.3,49.7L470.4,49.5L469.2,47.3L472.4,45.5L476.7,44.9L487.3,44.6Z" fill="#C8CAD2"></path>
+    <circle class="from" cx="537.5" cy="161.8" r="7" fill="#7237FF"></circle>
+    <polyline class="trail" points="" fill="none" stroke="#7237FF" stroke-width="3.5" stroke-dasharray="0 11" stroke-linecap="round"></polyline>
+    <circle class="to" cx="640.2" cy="432.1" r="7" fill="#13D2E5" opacity="0"></circle>
+    <g class="plane" opacity="0"><path d="M0 -15 c3 0 4 3 4 7 l0 4 l13 9 l0 4 l-13 -4 l0 7 l4 3 l0 3 l-8 -2 l-8 2 l0 -3 l4 -3 l0 -7 l-13 4 l0 -4 l13 -9 l0 -4 c0 -4 1 -7 4 -7 z" fill="#0A0E18"></path></g>
+  </svg></div>
+  <div class="cameo" style="width:520px;transform:translateY(-50%)">
+    <div class="ccard" style="position:relative;width:520px;height:328px;border-radius:24px;background:linear-gradient(135deg,#2B174F,#0A0E18);box-shadow:0 30px 80px rgba(43,23,79,.35);padding:34px;color:#F2F3F0">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="width:58px;height:44px;border-radius:8px;background:#C8CAD2"></div><p style="margin:0;font-family:Plex,monospace;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#B5BAC3">Teen account</p></div>
+      <p style="margin:40px 0 0;font-family:Plex,monospace;font-size:30px;letter-spacing:.14em">····  ····  ····  2026</p>
+      <div style="position:absolute;left:34px;bottom:30px"><p style="margin:0;font-family:Plex,monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#B5BAC3">Card holder</p><p style="margin:4px 0 0;font-size:22px;font-weight:600">My son</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">[the plane flies on its own] This summer we sent our son abroad for a year, to a South American country where we don’t know a soul. [click: the card] We set up a teen bank account for him before he left and gave him a debit card.</aside>
+</section>
+
+<!-- 07 discover -->
+<section class="slide with-cameo" id="discover">
+  <div class="top"><span>The card network</span></div>
+  <div class="mid">
+    <h2>It only works on one <span class="hi">payment network</span>.</h2>
+    <p class="sub s2">And not one cash machine in his town was on it.</p>
+  </div>
+  <div class="cameo" style="width:520px;transform:translateY(-50%)">
+    <div class="ccard" style="position:relative;width:520px;height:328px;border-radius:24px;background:linear-gradient(135deg,#2B174F,#0A0E18);box-shadow:0 30px 80px rgba(43,23,79,.35);padding:34px;color:#F2F3F0">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="width:58px;height:44px;border-radius:8px;background:#C8CAD2"></div><p style="margin:0;font-family:Plex,monospace;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#B5BAC3">Teen account</p></div>
+      <p style="margin:40px 0 0;font-family:Plex,monospace;font-size:30px;letter-spacing:.14em">····  ····  ····  2026</p>
+      <div style="position:absolute;left:34px;bottom:30px"><p style="margin:0;font-family:Plex,monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#B5BAC3">Card holder</p><p style="margin:4px 0 0;font-size:22px;font-weight:600">My son</p></div>
+      <img class="netlogo" src="assets/img/discover.png" alt="Discover Network" style="position:absolute;right:30px;bottom:28px;width:171px;height:112px;object-fit:contain;object-position:right bottom">
+      <div class="declined" style="position:absolute;right:-28px;top:-28px;background:#E5484D;color:#fff;font-size:26px;font-weight:600;padding:14px 26px;border-radius:999px;box-shadow:0 12px 30px rgba(10,14,24,.3);transform:rotate(6deg)">Declined</div>
+    </div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">[the card stays; the line comes in] We found out after he landed that it only works on one payment network. [click: the logo] [pause] [click: Declined] And not one cash machine in his town was on it. So our son is in a strange country with a card that does nothing, and our options were a wire transfer with a fee that made my eyes water, or figuring something else out.</aside>
+</section>
+
+<!-- 08 chain -->
+<section class="slide dark" id="chain">
+  <div class="top"><span>A town I had never been to</span></div>
+  <div class="mid chain">
+    <svg class="scene" viewBox="0 0 1456 440" width="1456" height="440" xmlns="http://www.w3.org/2000/svg" data-cast="avi-phone:82,90|jan-phone:446,90|man:810,90|son:1174,90"
+      data-bubble="jan-phone:560,0:I know a guy.|He’s good for it.;son:1250,40:Cash in hand."></svg>
+    <div class="labels">
+      <div><p class="b">Me</p><p class="s">at home</p></div>
+      <div><p class="b">Jan</p><p class="s">another city</p></div>
+      <div><p class="b">A man Jan knows</p><p class="s">in the town</p></div>
+      <div><p class="b">My son</p><p class="s">with a card that does nothing</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Build it on clicks as you tell it. [me] I messaged my friend Jan. [note flies; Jan] Jan lives in a different city, too far to help in person. But Jan knows people. Do you know anyone in my son’s town? He did. [the man; Jan vouches] He vouched for him. He connected us. [coin flies] I sent that man bitcoin. [cash flies; son] He walked over and put cash in my son’s hand. A man I had never met, in a town I had never been to, because Jan said he was good for it.</aside>
+</section>
+
+<!-- 09 asked -->
+<section class="slide dark" id="asked">
+  <div class="mid lines">
+    <h1 class="big l1">I asked someone.</h1>
+    <h1 class="big l2">And they <span class="hi">knew someone</span>.</h1>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">That’s the story. Both times, when it mattered, I asked someone. [click] And they knew someone. [long pause]</aside>
+</section>
+
+<!-- 10 spam, scams, slop -->
+<section class="slide dark" id="sss">
+  <div class="pre"><h1 class="huge">The internet<br>used to be <span class="hi">people</span>.</h1><p class="then">Then, somewhere, it stopped.</p></div>
+  <div class="mid">
+    <div class="sss">
+      <div class="col">
+        <div class="panel spam">
+          <div class="ptop"><span class="pname">The Golden Fork</span><span class="stars"><b>4.7</b> ★★★★★ <small>1,284 reviews</small></span></div>
+          <div class="rv"><span class="who">Kelly M.</span><span class="when">Tue 14 Oct</span><p>Great food, great service, great.</p></div>
+          <div class="rv"><span class="who">Dan P.</span><span class="when">Tue 14 Oct</span><p>Amazing place, would recommend it.</p></div>
+          <div class="rv"><span class="who">Priya S.</span><span class="when">Tue 14 Oct</span><p>Best restaurant in town, honestly.</p></div>
+          <div class="rv"><span class="who">Tom R.</span><span class="when">Tue 14 Oct</span><p>Lovely staff, lovely food, lovely.</p></div>
+          <div class="rv"><span class="who">Sam K.</span><span class="when">Tue 14 Oct</span><p>Five stars, will come back.</p></div>
+        </div>
+        <h1 class="w w1">Spam.</h1>
+      </div>
+      <div class="col">
+        <div class="panel phone">
+          <div class="phdr"><span class="pav"></span><span class="pnum">+44 7700 900123</span></div>
+          <div class="pwhen">Text Message · Today 23:41</div>
+          <div class="bub b1">Your parcel could not be delivered today. <u>Tap to reschedule</u></div>
+          <div class="bub b2">Unusual activity on your account. Confirm your details in the next 2 hours or it will be locked.</div>
+          <div class="bub b3">You are owed a tax refund of £248.40. Claim before midnight.</div>
+        </div>
+        <h1 class="w w2">Scams.</h1>
+      </div>
+      <div class="col">
+        <div class="panel slop">
+          <h4>How Long to Roast a Chicken: The Ultimate Guide (2026)</h4>
+          <div class="by">By Editorial Team · 11 min read · Updated today</div>
+          <div class="hero"><img src="assets/img/slop-chicken.jpg" alt=""></div>
+          <div class="jump">Jump to recipe ↓</div>
+          <h5>Chicken — the bird that changed dinner forever</h5>
+          <div class="ln" style="width:100%"></div><div class="ln" style="width:92%"></div><div class="ln" style="width:60%"></div>
+          <h5>It’s not a recipe; it’s a journey</h5>
+          <div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:70%"></div>
+          <h5>Not a meal. Not a dish. Just chicken.</h5>
+          <div class="ln" style="width:100%"></div><div class="ln" style="width:78%"></div>
+          <div class="ad">Advertisement</div>
+          <h5>A brief history of roasting</h5>
+          <div class="ln" style="width:96%"></div><div class="ln" style="width:100%"></div>
+        </div>
+        <h1 class="w w3 hi">Slop.</h1>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">[on arrival: The internet used to be people.] Some of you might remember what the internet used to be. It used to be people. You’d land on a forum where somebody had been to the place you were going, and they’d written it all down, badly, with typos, because they wanted you to have a good time. A blog by one person who’d fixed the exact thing that was broken on your car. You could feel a human on the other end. [click] Then, somewhere, it stopped. [click: the reviews] The bleach restaurant: four and a half stars, hundreds of them, all five words long, all on the same Tuesday. [click: the texts] The text message. Your parcel, your bank, your refund. [click: the article] The chicken nobody roasted. [click, click, click] Spam. Scams. Slop. Three words for one thing: the internet filled up with answers that no person stands behind.</aside>
+</section>
+
+<!-- 12 blank b -->
+<section class="slide dark" id="still-there">
+  <div class="top"><span>The good answers are still out there</span></div>
+  <div class="mid chain">
+    <svg class="scene" viewBox="0 0 1456 440" width="1456" height="440" xmlns="http://www.w3.org/2000/svg" data-cast="libor:446,90|jan:810,90"></svg>
+    <div class="labels two">
+      <div><p class="b">Still in Prague.</p></div>
+      <div><p class="b">Still knows a guy.</p></div>
+    </div>
+    <h2 class="line">The internet just lost the ability to <span class="hi">find them</span>.</h2>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">[Libor and Jan come in on their own] The good answers are still out there. Libor is still in Prague. Jan still knows a guy. [click] The internet just lost the ability to find them. Because the moment an answer could be made for free, a million of them got made, and the one real person who’d actually eaten there got buried under them. So we went back to the oldest trick there is.</aside>
+</section>
+
+<section class="slide" id="ask-someone">
+  <div class="top"><span>So we ask someone</span></div>
+  <div class="mid chain">
+    <svg class="scene" viewBox="0 0 1456 440" width="1456" height="440" xmlns="http://www.w3.org/2000/svg" data-cast="doctor:82,90|minder:446,90|boiler:810,90|came:1174,90"></svg>
+    <h2 class="q">How many of them did you find<br>through a <span class="hi">search engine</span>?</h2>
+    <h2 class="q2">Nobody.</h2>
+    <p class="sub last">There’s a website for everything else. There’s still no website for “who do my people trust?”</p>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Think about the people who matter in your life. [click] Your doctor. [click] The person who looks after your kids. [click] The one who fixed your boiler and you’ve used ever since. [click] The person you came here with this morning. [click] How many of them did you find through a search engine? [click] Nobody. Not one of us. We ask someone. We’ve always asked someone. Every good thing in your life came through a person. That’s how trust works. Someone you know vouches for someone they know, and you take it, because they’ve never steered you wrong. That instinct is older than the internet. [click] There’s a website for everything else. There’s still no website for “who do my people trust?”</aside>
+</section>
+
+<!-- 13 brainstorm -->
+<section class="slide" id="brainstorm">
+  <div class="top"><span>So we’re building it</span></div>
+  <div class="mid">
+    <img class="logo" src="assets/img/wordmark.svg" alt="Brainstorm" style="width:900px;height:200px;object-fit:contain;object-position:left">
+    <p class="sub s2" style="font-size:40px;margin-top:40px">The internet, answering the way <b>your people</b> do.</p>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">It’s called Brainstorm. Simple to say, hard to make. You ask it a question the way you’d ask a friend. The answer comes from your people, and their people, and you can see who. Libor’s name on the restaurant. Jan’s name on the man with the cash. [click] That’s the product. We’re not there yet, and I’ll say so all the way through.</aside>
+</section>
+
+<!-- 14 find the humans -->
+<section class="slide" id="find-the-humans">
+  <div class="mid">
+    <h1 class="huge m-hasline">Find the <span class="hi x">humans</span>.<i class="m-wire"></i></h1>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">We call it finding the humans. Let me show you where it is today. [long pause]</aside>
+</section>
+
+<!-- 15-18 footage -->
+<section class="slide footage" id="footage-manchester">
+  <div class="top"><span>brainstorm.world · this week</span><span class="tag-real">Real</span></div>
+  <div class="mid" style="align-items:center">
+    <div class="frame"><video src="assets/video/manchester-events.mp4" muted playsinline preload="auto"></video><div class="ph"><small>Footage slot 1 of 4</small>Search “Manchester” on Events → assets/video/manchester-events.mp4</div></div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">This is brainstorm.world, as it is this week. Let’s ask it what’s on in Manchester. That’s us, this weekend.</aside>
+</section>
+<section class="slide footage" id="footage-prague">
+  <div class="top"><span>brainstorm.world · this week</span><span class="tag-real">Real</span></div>
+  <div class="mid" style="align-items:center">
+    <div class="frame"><video src="assets/video/praha-places.mp4" muted playsinline preload="auto"></video><div class="ph"><small>Footage slot 2 of 4</small>Search “Praha” on Places → assets/video/praha-places.mp4</div></div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Now Prague, the city I didn’t know. Bars, cafés, restaurants.</aside>
+</section>
+<section class="slide footage" id="footage-book">
+  <div class="top"><span>brainstorm.world · this week</span><span class="tag-real">Real</span></div>
+  <div class="mid" style="align-items:center">
+    <div class="frame"><video src="assets/video/wuthering-heights.mp4" muted playsinline preload="auto"></video><div class="ph"><small>Footage slot 3 of 4</small>Search “Wuthering Heights” → assets/video/wuthering-heights.mp4</div></div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">And a book. Three different kinds of things, one place to ask. [pause] Underneath all of it is something you don’t see on other search engines.</aside>
+</section>
+<section class="slide footage" id="footage-people">
+  <div class="top"><span>brainstorm.world · this week</span><span class="tag-real">Real</span></div>
+  <div class="mid" style="align-items:center">
+    <div class="frame"><video src="assets/video/nathan-day.mp4" muted playsinline preload="auto"></video><div class="ph"><small>Footage slot 4 of 4</small>Search “Nathan Day” → assets/video/nathan-day.mp4</div></div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">People. Nathan, first time, because it’s ranked through my people. Everyone on this network, everything they’ve said, who they follow. That’s the raw material. [pause] What’s not there yet, and I said I’d be honest, is the thing I promised you. Libor’s name on the restaurant.</aside>
+</section>
+
+<!-- 19 card -->
+<section class="slide" id="card">
+  <div class="top"><span>What it looks like when it’s joined</span><span class="tag-real">Drawn, not live</span></div>
+  <div class="mid" style="align-items:center">
+    <div class="card glow">
+      <div class="kick">Place · Praha 1</div>
+      <h3>Červený Jelen</h3>
+      <div class="m">Restaurant · Czech · Hybernská 1033/7 · takes bitcoin</div>
+      <div class="prov">
+        <hr>
+        <div class="faces"><div class="pile"><div class="av" style="background:#7237FF">L</div><div class="av" style="background:#13D2E5;color:#0A0E18">J</div><div class="av" style="background:#2B174F">N</div><div class="av" style="background:#665487">M</div></div><p><b>Libor</b> and three people you follow have been here.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Today, the places are here and the people are here and we’re building the bit that joins them. [click: the people line builds in] This is what it looks like when it’s joined. Four people you know have been here. One of them is sitting next to you. That’s what we’re building now. [long pause]</aside>
+</section>
+
+<!-- 20 three things -->
+<section class="slide dark" id="three-things">
+  <div class="top"><span>How it’s built, and why it stays that way</span></div>
+  <div class="mid three">
+    <div class="t1"><span class="n">01</span><h2>Nobody owns it.</h2></div>
+    <div class="t2"><span class="n">02</span><h2>The ranking is never for sale.</h2></div>
+    <div class="t3"><span class="n">03</span><h2>It’s yours, and it goes with you.</h2></div>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">One line per click. Nobody owns it: it lives on the open network this whole day is about; our computers just read it. The ranking is never for sale: no slot at the top; a thousand fakes vouching for each other weigh nothing, because nobody you know vouches for them. It’s yours, and it goes with you. That’s the part your partner is here for. It’s why this one won’t rot.</aside>
+</section>
+
+<!-- 21 tagging -->
+<section class="slide" id="tagging">
+  <div class="top"><span>Today, at lunch</span><span class="tag-real">Drawn, not live</span></div>
+  <div class="mid" style="align-items:center">
+    <div class="card">
+      <div class="prof"><img class="av" src="assets/img/nathan.jpg" alt=""><div><h3>Nathan Day</h3><div class="m">BTC Map and Other Stuff</div></div></div>
+      <hr>
+      <div class="kick">Tags</div>
+      <div class="chips"><span class="chip">BTC Map</span><span class="chip">Maps</span><span class="chip add">+ <span class="typed"></span><span class="hintt">Add a tag</span></span><span class="chip on new">Manchester · you</span></div>
+    </div>
+  </div>
+  <p class="cap">A tag is “I’d send a friend to this person for this.”</p>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">Go to brainstorm.world and tag three people in this room for the thing you’d actually ask them about. [click: type Manchester, chip appears] Nathan for Manchester. Whoever you’d text about wine. The one who always knows a good pub. That’s all a tag is. You’ve just done, on the internet, the thing Jan did for me.</aside>
+</section>
+
+<!-- 22 chain again → agent -->
+<section class="slide dark" id="chain-agent">
+  <div class="top"><span>Agentic reputations</span></div>
+  <div class="mid chain">
+    <svg class="scene" viewBox="0 0 1456 440" width="1456" height="440" xmlns="http://www.w3.org/2000/svg" data-cast="avi-phone:82,90|jan-phone:446,90|man-agent:810,90|robot:810,90|son:1174,90"></svg>
+    <div class="labels">
+      <div><p class="b a">Me</p><p class="s a">at home</p><p class="b z">You</p><p class="s z">on your phone</p></div>
+      <div><p class="b a">Jan</p><p class="s a">vouched</p><p class="b z">Your people</p><p class="s z">who they vouch for</p></div>
+      <div><p class="b a">My agent</p><p class="s a">a man I’d never met</p><p class="b z">Your agent</p><p class="s z">software that acts for you</p></div>
+      <div><p class="b a">My son</p><p class="s a">cash in hand</p><p class="b z">The table</p><p class="s z">the ticket, the email</p></div>
+    </div>
+  </div>
+  <p class="cap c1">An agent is anyone who acts for you. Reputation is someone your people vouch for, so they can.</p>
+  <p class="cap c2">Your second brain, made of your people, that your AI thinks with.</p>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">The programme says Agentic Reputations, and I’ve gone fifteen minutes without saying it, so let me earn it. An agent is anyone who acts for you. The man in that South American town was my agent. I trusted him with my son because Jan said so. That’s all reputation ever was. [click: the man becomes your agent] Within a year most of you will have an agent of your own: software on your phone that books the table, buys the ticket, answers the email. First time it acts for you, it hits the problem I had in that town. It can ask the whole internet, or it can ask your people. The place you ask, and the place your agent asks. Your second brain, made of your people, that your AI thinks with. And it cuts the other way. Then the next few months: every one of those steps is the same step. Finding more of the humans.</aside>
+</section>
+
+<!-- 23 photos close -->
+<section class="slide dark" id="photos-close">
+  <div class="mid" style="align-items:center;gap:36px">
+    <div style="display:flex;gap:28px;width:1456px">
+      <div class="photo-wrap" style="position:relative;flex:1;height:520px;border-radius:24px;overflow:hidden;border:1px solid #2B3242"><img src="assets/photos/2023.jpg" alt="2023" style="object-position:50% 42%"><div class="ph"><small>Photo slot</small>2023</div></div>
+      <div class="photo-wrap" style="position:relative;flex:1;height:520px;border-radius:24px;overflow:hidden;border:1px solid #2B3242"><img src="assets/photos/2024.jpg" alt="2024"><div class="ph"><small>Photo slot</small>2024</div></div>
+      <div class="photo-wrap" style="position:relative;flex:1;height:520px;border-radius:24px;overflow:hidden;border:1px solid #2B3242"><img src="assets/photos/2025.jpg" alt="2025"><div class="ph"><small>Photo slot</small>2025</div></div>
+    </div>
+    <p class="sub s2" style="font-size:34px;text-align:center;margin:0">Someone you trust, who knows someone, who knows.</p>
+  </div>
+  <div class="foot"><span>brainstorm.world</span><span class="num"></span></div>
+  <aside class="m-notes">I’ll leave you where I started. In 2023 I didn’t know Prague. I knew Libor. And last month I didn’t know a soul in that South American town, but Jan did, and that was enough. [click] Everything we’re building comes down to that. So, at lunch: sit with the person you came with, tag each other for something. Next time you’re in a city you don’t know, ask it where to eat. If it gets it right, it’s because one of your people was there first.</aside>
+</section>
+
+<!-- 24 close -->
+<section class="slide" id="close">
+  <div class="top"><img class="wm logo" src="assets/img/wordmark.svg" alt="Brainstorm"></div>
+  <div class="mid side" style="gap:56px">
+    <div class="txt">
+      <h1 class="big">Find the <span class="hi">humans</span>.</h1>
+      <p class="sub s2" style="font-size:38px">Come and be one of them.</p>
+      <p class="meta s3" style="font-family:Plex,monospace;font-size:32px;letter-spacing:.04em;color:var(--ink)">brainstorm.world</p>
+    </div>
+    <div class="hero" style="position:relative;width:720px;height:450px;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(43,23,79,.28);background:#0A0E18">
+      <img src="assets/photos/bitfest-2025.jpg" alt="Six people at BitFest 2025" style="width:100%;height:100%;object-fit:cover;display:block">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(43,23,79,.35),transparent 55%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);border-radius:24px"></div>
+      <p style="position:absolute;left:22px;bottom:16px;margin:0;font-family:Plex,monospace;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,243,240,.85)">Nostrshire, 2025 · some of the humans</p>
+    </div>
+  </div>
+  <div class="foot"><span>Avi Burra · NosFabrica · 14:30 panel: Is Nostr culture dead?</span><span class="num"></span></div>
+  <aside class="m-notes">We’re building the internet that finds the humans. [click] Come and be one of them. [pause] Thank you.</aside>
+</section>
+
+<div id="dip"></div>
+<div id="notes"></div>
+<div id="hint">click right · next &nbsp;·&nbsp; click left · back &nbsp;·&nbsp; click middle · replay footage &nbsp;·&nbsp; N notes &nbsp;·&nbsp; P presenter &nbsp;·&nbsp; F fullscreen</div>
+
+<script>
+(()=>{
+const W=1600,H=900,NS='http://www.w3.org/2000/svg',EASE='cubic-bezier(.22,.7,.2,1)';
+const q=(r,s)=>r.querySelector(s),qa=(r,s)=>[...r.querySelectorAll(s)];
+let motionOn=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- cast: flat illustrated figures in the Brainstorm palette ---------- */
+const C={ink:'#0A0E18',purple:'#7237FF',cyan:'#13D2E5',white:'#F2F3F0',grey:'#C8CAD2',slate:'#4A5060',mist:'#7F8794',deep:'#2B174F',
+  skinA:'#F1C9A5',skinB:'#C98E6A',skinC:'#8D5B3B',hairA:'#3B2A22',hairB:'#1C2230',hairC:'#7F8794'};
+/* Two casts, switch with the C key (or ?cast=ill / ?cast=bs).
+   bs  = Benjamin's Brainstorm cast from "Tags, explained": one figure, colour says the relation to the viewer
+         (cyan = you, purple = close friend, light violet = friend of a friend, slate = stranger), name label says who.
+   ill = the illustrated lineup in assets/cast/. Each figure sits in a 200×270 box, feet at y=262. */
+let CAST=(new URLSearchParams(location.search).get('cast'))||'bs';
+const SPR={avi:['assets/cast/avi.svg',323,805,.5],jan:['assets/cast/jan.svg',306,815,.5],man:['assets/cast/man.svg',315,824,.5],
+  son:['assets/cast/son.svg',304,792,.5],libor:['assets/cast/libor.svg',524,818,.3],robot:['assets/cast/robot.svg',334,378,.5]};
+function sprite(k,h=300,cx=100){const [src,w0,h0,f]=SPR[k];const w=w0*h/h0;return `<image href="${src}" x="${(cx-w*f).toFixed(1)}" y="${262-h}" width="${w.toFixed(1)}" height="${h}"></image>`;}
+const BS={you:'#13D2E5',close:'#7237FF',fof:'#A78BFA',stranger:'#9AA1AC',anon:'#B5BAC3'};
+/* outback hat, drawn in the same 40×44 space as the figure: brim with upturned sides, pinched crown, band. Tan like the pack's tree trunk. */
+const HAT=`<path d="M1.5 8.5 C4 4.5 9 6.2 12 6.8 L28 6.8 C31 6.2 36 4.5 38.5 8.5 C33 11.2 25 12 20 12 C15 12 7 11.2 1.5 8.5 Z" fill="#B8A48C"></path><path d="M11.5 7.2 L12.4 -2.4 Q14.4 -5.4 17.4 -4 Q20 -2.6 22.6 -4 Q25.6 -5.4 27.6 -2.4 L28.5 7.2 Z" fill="#B8A48C"></path><path d="M11.8 4.6 L28.2 4.6 L28.5 7.2 L11.5 7.2 Z" fill="#8C7A62"></path>`;
+/* suit and tie over the figure: deep violet lapels, white shirt, ink tie; sunglasses on the head */
+const SUIT=`<path d="M14.6 24.6 L20 35.5 L25.4 24.6 Z" fill="#FFFFFF"></path><path d="M14.6 24.6 L20 35.5 L17.6 44 L10.4 44 L11 30.5 Z" fill="#2B174F"></path><path d="M25.4 24.6 L20 35.5 L22.4 44 L29.6 44 L29 30.5 Z" fill="#2B174F"></path><path d="M20 27.2 L18.4 29.6 L19.1 35.8 L20 38.6 L20.9 35.8 L21.6 29.6 Z" fill="#0A0E18"></path>`;
+/* a doctor's cap (white, purple cross) and a hard hat (the pack's orange), same 40×44 space */
+const MEDCAP=`<path d="M10.2 10.2 C10.2 -2.6 29.8 -2.6 29.8 10.2 Z" fill="#EFE9FF"></path><rect x="9.6" y="9.4" width="20.8" height="2.2" rx="1.1" fill="#EFE9FF"></rect><rect x="18.8" y="2.9" width="2.4" height="5.4" rx="0.6" fill="#4B1FD1"></rect><rect x="17.3" y="4.4" width="5.4" height="2.4" rx="0.6" fill="#4B1FD1"></rect>`;
+const HARDHAT=`<path d="M9.5 10.4 C9.5 -2.8 30.5 -2.8 30.5 10.4 Z" fill="#FF8A4C"></path><rect x="7" y="9.6" width="26" height="2.4" rx="1.2" fill="#FF8A4C"></rect><rect x="18.7" y="0.8" width="2.6" height="7.4" rx="1.3" fill="#A3410F"></rect>`;
+const SHADES=`<rect x="11.2" y="8.6" width="17.6" height="1.3" fill="#0A0E18"></rect><rect x="11.4" y="8" width="7.4" height="4.8" rx="1.8" fill="#0A0E18"></rect><rect x="21.2" y="8" width="7.4" height="4.8" rx="1.8" fill="#0A0E18"></rect>`;
+function pin(c,label,sc=3.5,hat,o={}){const w=40*sc,h=44*sc,x=100-w/2,y=262-h;
+  let g=`<ellipse cx="100" cy="262" rx="${(w*.42).toFixed(0)}" ry="11" fill="#0A0E18" opacity=".10"></ellipse><g transform="translate(${x},${y}) scale(${sc})"><circle cx="20" cy="11" r="9.5" fill="${c}"></circle><path d="M2 44 C2 30 10 23.5 20 23.5 C30 23.5 38 30 38 44 Z" fill="${c}"></path>${o.suit||o.shades?'<g class="gear">'+(o.suit?SUIT:'')+(o.shades?SHADES:'')+'</g>':''}${hat===true?HAT:hat||''}</g>`;
+  if(label){const lw=label.length*13+40;g=`<rect x="${100-lw/2}" y="44" width="${lw}" height="40" rx="12" fill="#fff" stroke="#E2E4E8" stroke-width="2"></rect><text x="100" y="71" text-anchor="middle" style="font:500 22px 'IBM Plex Mono',ui-monospace,monospace;fill:#0A0E18">${label}</text>`+g;}
+  return g;}
+function bot(sc=3,label){const w=34*sc,h=42*sc,x=100-w/2,y=262-h;
+  const lab=label?`<rect x="${100-(label.length*13+40)/2}" y="44" width="${label.length*13+40}" height="40" rx="12" fill="#fff" stroke="#E2E4E8" stroke-width="2"></rect><text x="100" y="71" text-anchor="middle" style="font:500 22px 'IBM Plex Mono',ui-monospace,monospace;fill:#0A0E18">${label}</text>`:'';
+  return lab+`<ellipse cx="100" cy="262" rx="${(w*.45).toFixed(0)}" ry="10" fill="#0A0E18" opacity=".10"></ellipse><g transform="translate(${x},${y}) scale(${sc})"><rect x="16" y="3" width="2" height="7" fill="#9AA1AC"></rect><circle cx="17" cy="3" r="2.6" fill="#9AA1AC"></circle><rect x="5" y="10" width="24" height="18" rx="4" fill="#B5BAC3"></rect><circle class="eye" cx="12" cy="19" r="2.6" fill="#FFFFFF"></circle><circle class="eye" cx="22" cy="19" r="2.6" fill="#FFFFFF"></circle><rect x="9" y="30" width="16" height="12" rx="3" fill="#B5BAC3"></rect></g>`;}
+const FIGS={
+  ill:{
+    'avi':()=>sprite('avi'),'avi-wave':()=>sprite('avi'),'avi-phone':()=>sprite('avi'),'agent':()=>sprite('jan'),'robot-agent':()=>sprite('robot',170),
+    'jan':()=>sprite('jan'),'jan-phone':()=>sprite('jan'),
+    'libor':()=>sprite('libor'),
+    'man':()=>sprite('man'),'man-agent':()=>sprite('man'),'doctor':()=>sprite('jan'),'minder':()=>sprite('libor'),'boiler':()=>sprite('man'),'came':()=>sprite('avi'),
+    'son':()=>sprite('son',270),
+    'son-card':()=>sprite('son',270)+`<rect x="206" y="118" width="54" height="34" rx="5" fill="${C.purple}"></rect><rect x="206" y="128" width="54" height="7" fill="${C.ink}"></rect><rect x="212" y="140" width="22" height="5" rx="2" fill="${C.white}"></rect>`,
+    'robot':()=>sprite('robot',170)
+  },
+  bs:{
+    'avi':()=>pin(BS.you,'Me',3.5,true),'agent':()=>pin(BS.close,'My agent',3.5,false,{suit:true,shades:true}),'robot-agent':()=>bot(3,'Also my agent'),'avi-wave':()=>pin(BS.you,'',3.5,true),'avi-phone':()=>pin(BS.you,'',3.5,true),
+    'jan':()=>pin(BS.close,'Jan'),'jan-phone':()=>pin(BS.close),
+    'libor':()=>pin(BS.close,'Libor'),
+    'doctor':()=>pin(BS.close,'Your doctor',3.5,MEDCAP),'minder':()=>pin(BS.fof,'Who minds your kids'),'boiler':()=>pin(BS.close,'The boiler man',3.5,HARDHAT),'came':()=>pin(BS.close,'Who you came with'),'man':()=>pin(BS.fof),'man-agent':()=>pin(BS.fof,'',3.5,false,{suit:true,shades:true}),
+    'son':()=>pin(BS.close,'',3),
+    'son-card':()=>pin(BS.close,'',3)+`<rect x="206" y="118" width="54" height="34" rx="5" fill="${C.purple}"></rect><rect x="206" y="128" width="54" height="7" fill="${C.ink}"></rect><rect x="212" y="140" width="22" height="5" rx="2" fill="${C.white}"></rect>`,
+    'robot':()=>bot()
+  }
+};
+const FIG=new Proxy({},{get:(_,k)=>FIGS[CAST][k]});
+const LABELED=new Set(['avi','jan','libor']);
+let BID=0;function bubble(x,y,lines,fid){const w=Math.max(...lines.map(l=>l.length))*11+44,h=lines.length*30+30;
+  return `<g class="m-bub"><g class="m-bs"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="16" fill="#fff" filter="url(#${fid})"></rect><path d="M${x+22} ${y+h-1} l12 18 l12-18 z" fill="#fff"></path></g><g class="m-bt">`+
+  lines.map((l,i)=>`<text x="${x+22}" y="${y+40+i*30}" class="c-b">${l}</text>`).join('')+`</g></g>`;}
+const STY=fid=>`<defs><filter id="${fid}" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0A0E18" flood-opacity=".18"></feDropShadow></filter></defs><style>.c-b{font:600 20px Figtree;fill:#0A0E18}</style>`;
+function fillCast(svg){const spec=svg.dataset.cast||'',bub=svg.dataset.bubble||'';const fid='bsh'+(++BID);let out=STY(fid);
+  spec.split('|').filter(Boolean).forEach(s=>{const [name,xy]=s.split(':'),[x,y]=xy.split(',').map(Number);out+=`<g transform="translate(${x},${y})"><g class="fig fig-${name}">${FIG[name]()}</g></g>`;});
+  bub.split(';').filter(Boolean).forEach(b=>{const [name,xy,txt]=b.split(':');let [x,y]=xy.split(',').map(Number);if(CAST==='bs'&&!LABELED.has(name))y+=60;out+=bubble(x,y,txt.split('|'),fid);});
+  svg.innerHTML=out;}
+qa(document,'svg[data-cast]').forEach(fillCast);
+
+/* ---------- runtime (after Benjamin's deck) ---------- */
+let anims=[],idles=[],timers=[];const holds=new Map(),restores=[],dinfo=new WeakMap();
+const A=(el,kf,o)=>{const a=el.animate(kf,Object.assign({fill:'backwards',easing:EASE},o));anims.push(a);return a;};
+function hold(el,p){let r=holds.get(el);if(!r){r={};holds.set(el,r);}for(const k in p){if(!(k in r))r[k]=el.style[k];el.style[k]=p[k];}}
+function unhold(el){const r=holds.get(el);if(!r)return;for(const k in r)el.style[k]=r[k];holds.delete(el);}
+function restoreAll(){for(const el of [...holds.keys()])unhold(el);restores.splice(0).forEach(f=>f());}
+function tween(delay,dur,fn){const start=performance.now()+delay;let raf,done=false;
+  const h={playState:'running',finish(){if(done)return;done=true;cancelAnimationFrame(raf);fn(1);h.playState='finished';},cancel(){done=true;cancelAnimationFrame(raf);h.playState='idle';}};
+  const tick=now=>{if(done)return;const p=Math.max(0,Math.min(1,(now-start)/dur));if(now>=start)fn(p);if(p>=1){done=true;h.playState='finished';}else raf=requestAnimationFrame(tick);};
+  raf=requestAnimationFrame(tick);anims.push(h);return h;}
+const busy=()=>anims.some(a=>a.playState==='running'||a.playState==='pending');
+function cancelAll(){anims.forEach(a=>a.cancel());anims=[];stopIdle();}
+function stopIdle(){idles.forEach(a=>a.cancel());idles=[];timers.forEach(clearTimeout);timers.forEach(clearInterval);timers=[];}
+const seq=(...xs)=>({pre(){xs.forEach(x=>x.pre())},play(t){for(const x of xs)t=x.play(t);return t;}});
+const par=(...xs)=>({pre(){xs.forEach(x=>x.pre())},play(t){return Math.max(t,...xs.map(x=>x.play(t)));}});
+const wait=ms=>({pre(){},play(t){return t+ms}});
+const lag=(ms,x)=>({pre(){x.pre()},play(t){return x.play(t+ms)}});
+const stag=(ms,xs)=>par(...xs.map((x,i)=>lag(i*ms,x)));
+const act=f=>({pre(){},play(t){setTimeout(f,t);return t;}});
+function fade(el,dur=300,y=0){return{pre(){hold(el,{opacity:'0'})},play(t){unhold(el);
+  A(el,y?[{opacity:0,transform:'translateY('+y+'px)'},{opacity:1,transform:'translateY(0)'}]:[{opacity:0},{opacity:1}],{duration:dur,delay:t});return t+dur;}};}
+const settle=el=>fade(el,520,12);
+function fadeOut(el,dur=300){return{pre(){},play(t){A(el,[{opacity:1},{opacity:0}],{duration:dur,delay:t,fill:'forwards'});setTimeout(()=>{hold(el,{opacity:'0'})},t+dur);return t+dur;}};}
+function wipe(el,dur=700){const a='inset(0 100% 0 0)',b='inset(0 0% 0 0)';return{pre(){hold(el,{clipPath:a})},play(t){unhold(el);A(el,[{clipPath:a},{clipPath:b}],{duration:dur,delay:t,easing:'cubic-bezier(.45,.1,.3,1)'});return t+dur;}};}
+function preDraw(e){const L=e.getTotalLength()+1;const a=L+' '+(L+20),from=L+10;dinfo.set(e,{a,from});hold(e,{strokeDasharray:a,strokeDashoffset:from+'px'});}
+function playDraw(e,t,d,ease){const{a,from}=dinfo.get(e);unhold(e);A(e,[{strokeDasharray:a,strokeDashoffset:from+'px'},{strokeDasharray:a,strokeDashoffset:'0px'}],{duration:d,delay:t,easing:ease||'cubic-bezier(.4,.1,.3,1)'});}
+const SEL='path,circle,rect,line,polyline,polygon,ellipse,text';
+const leaves=r=>(r.matches(SEL)?[r]:qa(r,SEL)).filter(e=>!e.closest('.m-skip,.m-bub'));
+function ink(root,dur=700){let ls;return{pre(){ls=leaves(root).map(e=>({e,s:e.tagName!=='text'&&getComputedStyle(e).stroke!=='none'&&getComputedStyle(e).fill==='none'}));ls.forEach(o=>o.s?preDraw(o.e):hold(o.e,{opacity:'0'}));},
+  play(t){const n=ls.length,span=dur*.6,d=Math.max(160,dur*.4);ls.forEach((o,i)=>{const at=t+(n>1?i*span/(n-1):0);
+    if(o.s)playDraw(o.e,at,d);else{unhold(o.e);A(o.e,[{opacity:0},{opacity:1}],{duration:140,delay:at+d*.5});}});return t+dur;}};}
+function pop(b){const s=q(b,'.m-bs'),x=q(b,'.m-bt');return{pre(){hold(s,{opacity:'0'});hold(x,{opacity:'0'})},play(t){unhold(s);unhold(x);
+  A(s,[{opacity:0,transform:'scale(.55)'},{opacity:1,transform:'scale(1.04)',offset:.7},{opacity:1,transform:'scale(1)'}],{duration:300,delay:t,easing:'cubic-bezier(.3,.6,.4,1)'});
+  A(x,[{opacity:0},{opacity:1}],{duration:200,delay:t+240});return t+440;}};}
+function chip(el){return{pre(){hold(el,{opacity:'0'})},play(t){unhold(el);A(el,[{opacity:0,transform:'scale(.7)'},{opacity:1,transform:'scale(1)'}],{duration:220,delay:t});return t+220;}};}
+function type(el,text,per=55){return{pre(){el.textContent='';restores.push(()=>el.textContent='');},play(t){const car=document.createElement('span');car.className='m-caret';const tn=document.createTextNode('');el.textContent='';el.append(tn,car);
+  tween(t,text.length*per,p=>{if(p>=1){el.textContent=text;return;}tn.data=text.slice(0,Math.floor(p*text.length));});return t+text.length*per;}};}
+function rise(el){return{pre(){hold(el,{opacity:'0'})},play(t){unhold(el);A(el,[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:500,delay:t});return t+500;}};}
+function drop(el){return{pre(){hold(el,{opacity:'0'})},play(t){unhold(el);A(el,[{opacity:0,transform:'translateY(-36px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,delay:t,easing:'cubic-bezier(.5,0,.75,.2)'});return t+420;}};}
+function scaleIn(el,dur){return{pre(){hold(el,{transform:'scaleX(0)'})},play(t){unhold(el);A(el,[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],{duration:dur,delay:t,easing:'cubic-bezier(.45,.1,.3,1)'});return t+dur;}};}
+function diag(el,dur){const a='polygon(0% 0%,0% 0%,0% 0%)',b='polygon(0% 0%,200% 0%,0% 200%)';return{pre(){hold(el,{clipPath:a})},play(t){unhold(el);A(el,[{clipPath:a},{clipPath:b}],{duration:dur,delay:t,easing:'cubic-bezier(.45,.1,.3,1)'});return t+dur;}};}
+/* fly: an svg group along an arc from a to b */
+function fly(g,a,b,dur=900,lift=120){return{pre(){hold(g,{opacity:'0'})},play(t){unhold(g);const cx=(a[0]+b[0])/2,cy=Math.min(a[1],b[1])-lift;
+  tween(t,dur,p=>{const e=p<.5?2*p*p:-1+(4-2*p)*p;const x=(1-e)*(1-e)*a[0]+2*(1-e)*e*cx+e*e*b[0],y=(1-e)*(1-e)*a[1]+2*(1-e)*e*cy+e*e*b[1];
+    g.setAttribute('transform',`translate(${x},${y}) rotate(${(e-.5)*20})`);g.style.opacity=p<.08?p/.08:p>.9?(1-p)/.1:1;});return t+dur;}};}
+/* svg prep: bubbles + cast */
+const mk=c=>{const g=document.createElementNS(NS,'g');if(c)g.setAttribute('class',c);return g;};
+function wrap(els,c){const g=mk(c);els[0].parentNode.insertBefore(g,els[0]);els.forEach(e=>g.appendChild(e));return g;}
+function bubbles(svg){const out=[];let kids=[...svg.children];
+  for(let i=0;i<kids.length;i++){const k=kids[i];if(k.tagName==='path'&&k.getAttribute('fill')==='#fff'&&k.getAttribute('stroke-width')==='3.5'){
+    const sh=[k];let j=i+1;while(j<kids.length&&kids[j].tagName==='path'&&sh.length<3)sh.push(kids[j++]);const tx=[];while(j<kids.length&&kids[j].tagName==='text')tx.push(kids[j++]);
+    const b=mk('m-bub');svg.insertBefore(b,k);b.appendChild(wrap(sh,'m-bs'));if(tx.length)b.appendChild(wrap(tx,'m-bt'));else b.appendChild(mk('m-bt'));out.push(b);i=j-1;}}
+  return out;}
+function cast(svg){return{chars:qa(svg,'.fig'),bubs:qa(svg,'.m-bub')};}
+function enter(g,dur=640){return{pre(){g.style.transformBox='fill-box';g.style.transformOrigin='50% 100%';hold(g,{opacity:'0'})},play(t){unhold(g);A(g,[{opacity:0,transform:'translateY(22px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:dur,delay:t,easing:'cubic-bezier(.2,.7,.2,1)'});return t+dur;}};}
+function flyer(svg,kind){const g=mk('m-skip');let inner='';
+  if(kind==='note')inner=`<rect x="-18" y="-13" width="36" height="26" rx="5" fill="#F2F3F0" stroke="#13D2E5" stroke-width="3"></rect><path d="M-18 -11 l18 12 l18 -12" fill="none" stroke="#13D2E5" stroke-width="3"></path>`;
+  if(kind==='coin')inner=`<circle r="17" fill="#7237FF" stroke="#F2F3F0" stroke-width="3"></circle><text y="7" text-anchor="middle" style="font:700 20px Figtree;fill:#fff">B</text>`;
+  if(kind==='cash')inner=`<rect x="-24" y="-14" width="48" height="28" rx="4" fill="#F2F3F0" stroke="#13D2E5" stroke-width="3"></rect><circle r="7" fill="none" stroke="#13D2E5" stroke-width="3"></circle>`;
+  if(kind==='check')inner=`<circle r="16" fill="#13D2E5"></circle><path d="M-7 0 l5 5 l10 -11" fill="none" stroke="#0A0E18" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>`;
+  g.innerHTML=inner;g.style.opacity='0';svg.appendChild(g);return g;}
+function blinkIdle(eyeSel,root,delay){const eyes=qa(root,eyeSel);eyes.forEach(e=>e.classList.add('m-blink'));
+  const blink=()=>eyes.forEach(e=>idles.push(e.animate([{transform:'scaleY(1)'},{transform:'scaleY(.1)',offset:.5},{transform:'scaleY(1)'}],{duration:420,easing:'ease-in-out'})));
+  timers.push(setTimeout(()=>{blink();timers.push(setInterval(blink,5200));},delay+4000));}
+
+/* ---------- slides ---------- */
+const slides=qa(document,'section.slide');
+slides.forEach((s,i)=>{const n=q(s,'.num');if(n)n.textContent=String(i+1).padStart(2,'0')+' / '+slides.length;});
+qa(document,'.photo-wrap img,.pframe img').forEach(im=>{im.addEventListener('error',()=>{im.classList.add('missing');(im.closest('.photo-wrap')||im.closest('.pframe')).classList.add('missing');});});
+qa(document,'.netlogo').forEach(im=>im.addEventListener('error',()=>{im.style.display='none';}));
+qa(document,'.frame video').forEach(v=>{v.addEventListener('error',()=>v.closest('.frame').classList.add('missing'));});
+let defs=slides.map((s,i)=>{try{return build(s.id,s)}catch(e){console.warn('motion',s.id,e);return{steps:[]}}});
+function switchCast(){CAST=CAST==='bs'?'ill':'bs';cancelAll();restoreAll();qa(document,'svg[data-cast]').forEach(fillCast);defs=slides.map((s,i)=>{try{return build(s.id,s)}catch(e){return{steps:[]}}});show(cur,true);}
+function build(id,s){const h1=q(s,'h1'),cam=q(s,'.cameo svg');
+  switch(id){
+  case 'cover':{const c=cast(q(s,'.cover-cast svg'));
+    return{steps:[seq(par(wipe(q(s,'.logo')),lag(250,settle(h1)),lag(400,fade(q(s,'.sub'),500)),lag(500,fade(q(s,'.meta'),500))),stag(260,c.chars.map(g=>enter(g))))],
+      idle(d){blinkIdle('.fig-jan .eye',s,d);}};}
+  case 'intro':{const c=cast(cam);return{steps:[seq(par(settle(h1),lag(150,fade(q(s,'.l1'),400)),lag(300,fade(q(s,'.l2'),400)),lag(450,fade(q(s,'.l3'),400))),enter(c.chars[0]),pop(c.bubs[0]))]};}
+  case 'wink':return{steps:[settle(h1),fade(q(s,'.s2'),500,8),fade(q(s,'.s3'),400)]};
+  case 'libor':{const c=cast(cam);return{steps:[settle(q(s,'.l1')),seq(settle(q(s,'.l2')),enter(c.chars[0]),pop(c.bubs[0]))],idle(d){blinkIdle('.fig-libor .eye',s,d);}};}
+  case 'flight':{const svg=q(s,'.map svg'),trail=q(svg,'.trail'),plane=q(svg,'.plane'),to=q(svg,'.to'),P=[[537.5, 161.8], [539.1, 164.7], [540.7, 167.7], [542.2, 170.6], [543.8, 173.7], [545.3, 176.7], [546.8, 179.7], [548.3, 182.8], [549.7, 185.9], [551.2, 189], [552.6, 192.2], [554, 195.3], [555.4, 198.5], [556.8, 201.7], [558.2, 204.9], [559.5, 208.2], [560.9, 211.4], [562.2, 214.7], [563.5, 218], [564.9, 221.3], [566.2, 224.6], [567.5, 227.9], [568.8, 231.3], [570.1, 234.6], [571.3, 238], [572.6, 241.4], [573.9, 244.8], [575.1, 248.2], [576.4, 251.6], [577.6, 255], [578.9, 258.5], [580.1, 261.9], [581.3, 265.4], [582.6, 268.9], [583.8, 272.3], [585, 275.8], [586.2, 279.3], [587.4, 282.8], [588.7, 286.3], [589.9, 289.8], [591.1, 293.3], [592.3, 296.8], [593.5, 300.4], [594.7, 303.9], [595.9, 307.4], [597.1, 310.9], [598.3, 314.5], [599.5, 318], [600.7, 321.5], [601.9, 325.1], [603.1, 328.6], [604.3, 332.1], [605.5, 335.7], [606.7, 339.2], [607.9, 342.7], [609.1, 346.2], [610.3, 349.8], [611.5, 353.3], [612.7, 356.8], [613.9, 360.3], [615.1, 363.8], [616.3, 367.3], [617.5, 370.8], [618.8, 374.3], [620, 377.8], [621.2, 381.2], [622.4, 384.7], [623.7, 388.2], [624.9, 391.6], [626.1, 395], [627.4, 398.5], [628.6, 401.9], [629.9, 405.3], [631.2, 408.7], [632.4, 412.1], [633.7, 415.4], [635, 418.8], [636.3, 422.2], [637.6, 425.5], [638.9, 428.8], [640.2, 432.1]];
+    const bow=(p)=>{const i=p*(P.length-1),k=Math.floor(i),f=i-k,a=P[k],b=P[Math.min(k+1,P.length-1)];const x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f;const s=Math.sin(Math.PI*p);return [x+s*70,y-s*20];};
+    const flight={pre(){trail.setAttribute('points','');plane.setAttribute('opacity','0');to.setAttribute('opacity','0');},play(t){tween(t,2600,p=>{const e=p<.5?2*p*p:-1+(4-2*p)*p;const n=Math.max(2,Math.round(e*120));const pts=[];for(let i=0;i<=n;i++)pts.push(bow(e*i/n));trail.setAttribute('points',pts.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' '));
+      const [x,y]=bow(e),[x0,y0]=bow(Math.max(0,e-.01)),ang=Math.atan2(y-y0,x-x0)*180/Math.PI+90;plane.setAttribute('transform',`translate(${x},${y}) rotate(${ang}) scale(1.6)`);plane.setAttribute('opacity',p<.05?p/.05:p>.96?(1-p)/.04:1);if(p>.95)to.setAttribute('opacity',String((p-.95)/.05));});return t+2600;}};
+    return{steps:[seq(fade(q(s,'.map'),500,8),lag(200,flight)),drop(q(s,'.ccard'))]};}
+  case 'discover':{const d=q(s,'.declined'),lg=q(s,'.netlogo');return{steps:[settle(q(s,'h2')),chip(lg),seq({pre(){hold(d,{opacity:'0'})},play(t){unhold(d);A(d,[{opacity:0,transform:'rotate(6deg) scale(.5)'},{opacity:1,transform:'rotate(6deg) scale(1.08)',offset:.7},{opacity:1,transform:'rotate(6deg) scale(1)'}],{duration:320,delay:t,easing:'cubic-bezier(.3,.6,.4,1)'});return t+320;}},lag(150,fade(q(s,'.s2'),400,8)))]};}
+  case 'chain':{const svg=q(s,'.scene'),c=cast(svg),[me,jan,man,son]=c.chars,L=qa(s,'.labels div'),lab=k=>par(fade(q(L[k],'.b'),300,6),lag(80,fade(q(L[k],'.s'),300,6)));
+    const note=flyer(svg,'note'),coin=flyer(svg,'coin'),cash=flyer(svg,'cash'),chk=flyer(svg,'check');
+    return{steps:[par(enter(me),lag(300,lab(0))),
+      seq(fly(note,[182,262],[546,262],800,120),par(enter(jan),lag(300,lab(1))),pop(c.bubs[0])),
+      seq(par(enter(man),lag(300,lab(2))),{pre(){},play(t){chk.setAttribute('transform','translate(960,118)');A(chk,[{opacity:0,transform:'translate(960px,118px) scale(.4)'},{opacity:1,transform:'translate(960px,118px) scale(1)'}],{duration:320,delay:t,fill:'forwards'});return t+320;}}),
+      fly(coin,[182,280],[910,290],1100,240),
+      seq(fly(cash,[950,290],[1274,300],800,120),par(enter(son),lag(300,lab(3))),pop(c.bubs[1]))],
+      idle(d){blinkIdle('.fig-jan-phone .eye,.fig-man .eye,.fig-son .eye',s,d);}};}
+  case 'photo-2023':case 'photo-2024':case 'photo-2025':return{steps:[par(fade(q(s,'.pframe'),600,12),lag(300,fade(q(s,'.pyear'),400)))]};
+  case 'asked':return{steps:[settle(q(s,'.l1')),settle(q(s,'.l2'))]};
+  case 'sss':{const P=qa(s,'.panel'),pre=q(s,'.pre');return{steps:[settle(q(pre,'h1')),fade(q(pre,'.then'),420,8),seq(fadeOut(pre,350),rise(P[0]),stag(90,qa(P[0],'.rv').map(e=>fade(e,260,8)))),seq(rise(P[1]),stag(260,qa(P[1],'.bub,.pwhen').map(e=>fade(e,260,10)))),seq(rise(P[2]),stag(40,qa(P[2],'h5,.ln,.ad,.hero,.jump').map(e=>fade(e,200,4)))),pop1(q(s,'.w1')),pop1(q(s,'.w2')),pop1(q(s,'.w3'))]};}
+  case 'brainstorm':return{steps:[wipe(q(s,'.logo'),900),fade(q(s,'.s2'),500,8)]};
+  case 'find-the-humans':{const x=q(h1,'.x');return{steps:[par(settle(h1),lag(600,diag(x,520)),lag(700,scaleIn(q(h1,'.m-wire'),600)))]};}
+  case 'footage-manchester':case 'footage-prague':case 'footage-book':case 'footage-people':{const v=q(s,'video');return{steps:[fade(q(s,'.frame'),500,10)],idle(){if(v)v.play().catch(()=>{});},leave(){if(v){v.pause();v.currentTime=0;}}};}
+  case 'card':{const avs=qa(s,'.av'),p=q(s,'.faces p');return{steps:[fade(q(s,'.card'),500,10),seq(fade(q(s,'.prov'),250),stag(120,avs.map(chip)),fade(p,350,6))]};}
+  case 'three-things':return{steps:[rise(q(s,'.t1')),rise(q(s,'.t2')),rise(q(s,'.t3'))]};
+  case 'tagging':{const typed=q(s,'.typed'),hint=q(s,'.hintt'),nu=q(s,'.chip.new');
+    return{steps:[fade(q(s,'.card'),500,10),seq(act(()=>hold(hint,{display:'none'})),type(typed,'Manchester'),wait(350),act(()=>{typed.textContent='';unhold(hint);}),chip(nu),lag(100,fade(q(s,'.cap'),400,6)))],
+      pre(){hold(q(s,'.cap'),{opacity:'0'});}};}
+  case 'still-there':{const svg=q(s,'.scene'),c=cast(svg),L=qa(s,'.labels div .b');
+    return{steps:[seq(stag(300,c.chars.map(g=>enter(g))),lag(200,par(...L.map(e=>fade(e,300,6))))),settle(q(s,'.line'))]};}
+  case 'ask-someone':{const svg=q(s,'.scene'),c=cast(svg);
+    return{steps:[wait(0),...c.chars.map(g=>enter(g)),settle(q(s,'.q')),pop1(q(s,'.q2')),fade(q(s,'.last'),400,8)]};}
+  case 'chain-agent':{const svg=q(s,'.scene'),c=cast(svg),man=q(svg,'.fig-man-agent'),bot=q(svg,'.fig-robot'),gear=q(man,'.gear');
+    const A1=qa(s,'.labels .a'),Z1=qa(s,'.labels .z');
+    const suitUp=gear?{pre(){hold(gear,{opacity:'0'})},play(t){unhold(gear);A(gear,[{opacity:0,transform:'translateY(-16px)'},{opacity:1,transform:'translateY(0)'}],{duration:480,delay:t,easing:'cubic-bezier(.2,.7,.2,1)'});return t+480;}}:wait(0);
+    return{steps:[seq(par(fade(svg,400),fade(q(s,'.c1'),400,6)),lag(900,suitUp)),seq(par(fadeOut(man,350),...A1.map(e=>fadeOut(e,300)),fadeOut(q(s,'.c1'),300)),par(enter(bot),...Z1.map(e=>fade(e,300,6)),lag(400,fade(q(s,'.c2'),400,6))))],
+      pre(){hold(bot,{opacity:'0'});Z1.forEach(e=>hold(e,{opacity:'0'}));hold(q(s,'.c2'),{opacity:'0'});}};}
+  case 'photos-close':return{steps:[stag(220,qa(s,'.photo-wrap').map(d=>fade(d,500,10))),fade(q(s,'.s2'),500,8)]};
+  case 'close':return{steps:[par(wipe(q(s,'.logo')),lag(250,settle(h1)),lag(500,fade(q(s,'.hero'),800,14))),fade(q(s,'.s2'),500,8),fade(q(s,'.s3'),500,8)]};
+  default:return{steps:[]};}}
+function pop1(el){return{pre(){hold(el,{opacity:'0'})},play(t){unhold(el);A(el,[{opacity:0,transform:'translateY(14px) scale(.96)'},{opacity:1,transform:'translateY(0) scale(1)'}],{duration:380,delay:t,easing:'cubic-bezier(.3,.6,.4,1)'});return t+380;}};}
+
+/* ---------- navigation ---------- */
+const dip=q(document,'#dip'),notes=q(document,'#notes');let notesOn=false;
+let cur=-1,step=0,def=null,switching=false;
+const fit=()=>document.documentElement.style.setProperty('--s',Math.min(innerWidth/W,innerHeight/H));addEventListener('resize',fit);fit();
+function syncNotes(){const a=q(slides[cur],'aside.m-notes');notes.innerHTML=a?a.innerHTML:'';notes.classList.toggle('on',notesOn&&!!a);}
+function show(i,complete){if(def&&def.leave)def.leave();cancelAll();restoreAll();slides.forEach((s,k)=>s.classList.toggle('cur',k===i));cur=i;def=defs[i];
+  history.replaceState(null,'','#'+(i+1));syncNotes();if(def.pre)def.pre();
+  if(complete||!motionOn){step=def.steps.length;if(complete&&def.pre){}startIdle(0);return;}
+  def.steps.forEach(x=>x&&x.pre());step=0;playStep();}
+function playStep(){const x=def.steps[step++];const end=x?x.play(0):0;if(step===1)startIdle(end);}
+function startIdle(d){if(def.idle)def.idle(d);}
+function skip(){anims.forEach(a=>a.finish());anims=[];}
+function go(i,complete){i=Math.max(0,Math.min(slides.length-1,i));if(switching)return;
+  if(motionOn&&cur>=0&&i!==cur&&slides[i].classList.contains('dark')!==slides[cur].classList.contains('dark')){switching=true;
+    dip.animate([{opacity:0},{opacity:1},{opacity:0}],{duration:320,easing:'ease-in-out'});setTimeout(()=>{show(i,complete);switching=false;},160);}
+  else show(i,complete);}
+function next(){if(switching)return;if(busy()){skip();return;}if(step<def.steps.length)playStep();else if(cur<slides.length-1)go(cur+1);}
+function prev(){if(cur>0)go(cur-1,true);}
+addEventListener('keydown',e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;const k=e.key;
+  if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(k)){e.preventDefault();next();}
+  else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){e.preventDefault();prev();}
+  else if(k==='Home')go(0);else if(k==='End')go(slides.length-1,true);
+  else if(k==='s'||k==='S')show(cur,true);else if(k==='c'||k==='C')switchCast();else if(k==='r'||k==='R'){const v=q(slides[cur],'video');if(v){v.currentTime=0;v.play().catch(()=>{});}}
+  else if(k==='n'||k==='N'){notesOn=!notesOn;syncNotes();}
+  else if(k==='m'||k==='M'){motionOn=!motionOn;show(cur,true);}
+  else if(k==='p'||k==='P')openPresenter();
+  else if(k==='f'||k==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}});
+let px=0,py=0,pt=0;addEventListener('pointerdown',e=>{px=e.clientX;py=e.clientY;pt=Date.now();},{passive:true});
+addEventListener('pointerup',e=>{if(e.target.closest('a'))return;const dx=e.clientX-px,dy=e.clientY-py;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){(dx<0?next:prev)();return;}if(Math.abs(dx)<12&&Math.abs(dy)<12&&Date.now()-pt<600){const v=slides[cur].classList.contains('footage')&&q(slides[cur],'video');const x=e.clientX/innerWidth;if(v&&x>.35&&x<.65){v.currentTime=0;v.play().catch(()=>{});return;}(x<.5?prev:next)();}});
+addEventListener('touchend',e=>{e.preventDefault();},{passive:false});
+let ct;addEventListener('mousemove',()=>{document.body.classList.remove('nocur');clearTimeout(ct);ct=setTimeout(()=>document.body.classList.add('nocur'),1600);});
+addEventListener('hashchange',()=>{const n=parseInt(location.hash.slice(1),10)-1;if(!isNaN(n)&&n!==cur)go(n);});
+addEventListener('beforeprint',()=>{cancelAll();restoreAll();});
+
+/* ---------- presenter (P) ---------- */
+let pw=null,pT0=Date.now();
+function openPresenter(){if(pw&&!pw.closed){pw.focus();return;}pw=open('','bitfest-presenter','width=960,height=640');pT0=Date.now();
+  pw.document.write(`<!doctype html><title>Presenter</title><style>body{margin:0;background:#0A0E18;color:#fff;font-family:Figtree,sans-serif;padding:24px 28px}.bar{display:flex;gap:28px;align-items:center;font:500 15px monospace;color:#B5BAC3}.clk{font:600 44px sans-serif;color:#fff}.t{font-size:26px;font-weight:600;margin:22px 0 10px}.n{font-size:21px;line-height:1.5;color:#E6E7EA}.nx{margin-top:28px;font-size:15px;color:#7F8794;font-family:monospace}.nx b{display:block;color:#B5BAC3;font-family:sans-serif;font-size:18px;margin-top:6px}</style><div class="bar"><span class="clk" id="c">00:00</span><span id="s"></span><span>← → to move · R resets clock</span></div><div class="t" id="t"></div><div class="n" id="n"></div><div class="nx">NEXT<b id="x"></b></div>`);
+  pw.document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')next();else if(e.key==='ArrowLeft')prev();else if(e.key==='r'||e.key==='R')pT0=Date.now();});
+  setInterval(()=>{if(!pw||pw.closed)return;const el=Math.floor((Date.now()-pT0)/1000);pw.document.getElementById('c').textContent=String(Math.floor(el/60)).padStart(2,'0')+':'+String(el%60).padStart(2,'0');
+    const d=pw.document,s=slides[cur],nx=slides[cur+1];const title=x=>x?(q(x,'h1,h2,h3')||{textContent:x.id}).textContent.trim().slice(0,80):'end';
+    d.getElementById('s').textContent=`slide ${cur+1} / ${slides.length} · step ${Math.min(step,def.steps.length)} / ${def.steps.length}`;
+    d.getElementById('t').textContent=title(s);const a=q(s,'aside.m-notes');d.getElementById('n').textContent=a?a.textContent:'';d.getElementById('x').textContent=title(nx);},300);}
+
+/* ---------- start ---------- */
+document.body.classList.add('show-hint');setTimeout(()=>document.body.classList.remove('show-hint'),4000);
+const h=parseInt(location.hash.slice(1),10);go(isNaN(h)?0:h-1);
+window.__deck={go,next,prev,get cur(){return cur}};
+})();
+</script>
+</body>
+</html>
