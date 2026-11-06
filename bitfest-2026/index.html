@@ -756,7 +756,7 @@ function openPresenter(){if(pw&&!pw.closed){pw.focus();return;}pw=open('','bitfe
 /* ---------- start ---------- */
 document.body.classList.add('show-hint');setTimeout(()=>document.body.classList.remove('show-hint'),4000);
 const h=parseInt(location.hash.slice(1),10);go(isNaN(h)?0:h-1);
-window.__deck={go,next,prev,get cur(){return cur}};
+window.__deck={go,next,prev,get cur(){return cur},get step(){return step},get busy(){return busy()},get steps(){return defs.map(d=>d.steps.length)}};
 })();
 </script>
 </body>
